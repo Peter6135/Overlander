@@ -1,0 +1,155 @@
+@extends('layouts.app')
+
+@section('title', $destination->name . ' — Overlander')
+@section('main-class', '')
+
+@section('content')
+
+<div class="relative h-80 sm:h-96">
+    <img src="{{ $destination->cover_photo }}" class="w-full h-full object-cover" alt="{{ $destination->name }}">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 right-0 max-w-6xl mx-auto px-4 pb-6 text-white">
+        <div class="flex flex-wrap gap-2 mb-2">
+            @foreach($destination->categories as $cat)
+                <span class="text-xs px-2 py-0.5 rounded-full bg-white/20 backdrop-blur">{{ $cat->name }}</span>
+            @endforeach
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black">{{ $destination->name }}</h1>
+        <p class="text-neutral-200 text-sm mt-1">📍 {{ $destination->location }}</p>
+    </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 py-10 grid sm:grid-cols-3 gap-10">
+    <div class="sm:col-span-2 space-y-8">
+
+        @if($destination->description)
+        <div>
+            <h2 class="text-lg font-bold text-gray-900 mb-2">{{ __('destinations.about_title') }}</h2>
+            <p class="text-gray-600 leading-relaxed">{{ $destination->description }}</p>
+        </div>
+        @endif
+
+        @if($destination->what_to_do)
+        <div>
+            <h2 class="text-lg font-bold text-gray-900 mb-2">{{ __('destinations.what_to_do_title') }}</h2>
+            <p class="text-gray-600 leading-relaxed">{{ $destination->what_to_do }}</p>
+        </div>
+        @endif
+
+        @if($destination->point_of_interest)
+        <div>
+            <h2 class="text-lg font-bold text-gray-900 mb-2">{{ __('destinations.poi_title') }}</h2>
+            <p class="text-gray-600 leading-relaxed">{{ $destination->point_of_interest }}</p>
+        </div>
+        @endif
+
+        @if($destination->activities->count())
+        <div>
+            <h2 class="text-lg font-bold text-gray-900 mb-4">{{ __('destinations.activity_title') }}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                @foreach($destination->activities as $activity)
+                <div class="rounded-2xl overflow-hidden border border-gray-100">
+                    @if($activity->photo)
+                        <img src="{{ $activity->photo }}" class="w-full h-32 object-cover" alt="">
+                    @endif
+                    <div class="p-4">
+                        <span class="text-xs uppercase tracking-wide text-brand-500 font-semibold">{{ $activity->type }}</span>
+                        <p class="font-semibold text-gray-800 mt-1">{{ $activity->title }}</p>
+                        @if($activity->description)
+                            <p class="text-sm text-gray-500 mt-1">{{ $activity->description }}</p>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        {{-- Reviews --}}
+        <div>
+            <h2 class="text-lg font-bold text-gray-900 mb-4">{{ __('destinations.reviews_title') }}</h2>
+
+            @auth
+            <form method="POST" action="{{ route('reviews.store', $destination) }}" class="bg-gray-50 rounded-2xl p-4 mb-6">
+                @csrf
+                <p class="text-sm font-medium text-gray-700 mb-2">{{ __('destinations.review_form_label') }}</p>
+                <div class="flex gap-1 mb-3" id="rating-stars">
+                    @for($i = 1; $i <= 5; $i++)
+                        <label class="cursor-pointer text-2xl text-gray-300 [&:has(input:checked)]:text-yellow-400 has-[~label:hover]:text-yellow-300">
+                            <input type="radio" name="rating" value="{{ $i }}" class="hidden" required>★
+                        </label>
+                    @endfor
+                </div>
+                <textarea name="comment" rows="2" placeholder="{{ __('destinations.review_placeholder') }}"
+                          class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm mb-3 focus:border-brand-400 focus:ring-2 focus:ring-brand-100"></textarea>
+                <button type="submit" class="px-5 py-2 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600">{{ __('destinations.review_submit') }}</button>
+            </form>
+            @else
+            <p class="text-sm text-gray-500 mb-6">
+                <a href="{{ route('login') }}" class="text-brand-500 font-medium hover:underline">{{ __('destinations.login') }}</a> {{ __('destinations.to_leave_a_review') }}
+            </p>
+            @endauth
+
+            <div class="space-y-4">
+                @forelse($reviews as $review)
+                <div class="flex items-start gap-3 border-b border-gray-100 pb-4">
+                    <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold shrink-0">
+                        {{ strtoupper(substr($review->reviewer_name, 0, 1)) }}
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-medium text-sm text-gray-800">{{ $review->reviewer_name }}</span>
+                            <span class="text-yellow-500 text-xs">{{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1">{{ $review->comment }}</p>
+                    </div>
+                </div>
+                @empty
+                <p class="text-sm text-gray-400">{{ __('destinations.reviews_empty') }}</p>
+                @endforelse
+            </div>
+            {{ $reviews->links() }}
+        </div>
+    </div>
+
+    <div class="space-y-6">
+        @if($destination->nature_level || $destination->culture_level || $destination->heritage_level)
+        <div class="bg-white rounded-2xl border border-gray-200 p-5">
+            <p class="font-semibold text-gray-800 mb-3">{{ __('destinations.levels_title') }}</p>
+            @foreach(['nature_level' => __('destinations.level_nature'), 'culture_level' => __('destinations.level_culture'), 'heritage_level' => __('destinations.level_heritage')] as $field => $label)
+                @if($destination->$field)
+                <div class="mb-3 last:mb-0">
+                    <div class="flex justify-between text-xs text-gray-500 mb-1"><span>{{ $label }}</span><span>{{ $destination->$field }}/5</span></div>
+                    <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-brand-500" style="width: {{ $destination->$field * 20 }}%"></div>
+                    </div>
+                </div>
+                @endif
+            @endforeach
+        </div>
+        @endif
+
+        @if($destination->packages->count())
+        <div class="bg-white rounded-2xl border border-gray-200 p-5">
+            <p class="font-semibold text-gray-800 mb-3">{{ __('destinations.available_packages_title') }}</p>
+            <div class="space-y-3">
+                @foreach($destination->packages as $package)
+                <a href="{{ route('packages.show', $package) }}" class="block border border-gray-100 rounded-xl p-3 hover:border-brand-300 transition-colors">
+                    <p class="text-sm font-medium text-gray-800">{{ $package->name }}</p>
+                    <p class="text-xs text-gray-500">{{ $package->category?->name }}</p>
+                </a>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        @if($destination->packages->isNotEmpty())
+        <a href="{{ route('packages.show', $destination->packages->first()) }}"
+           class="block text-center px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
+            {{ __('destinations.book_now') }}
+        </a>
+        @endif
+    </div>
+</div>
+
+@endsection

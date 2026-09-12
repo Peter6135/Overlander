@@ -1,0 +1,35 @@
+<?php
+
+return [
+    'welcome_back' => 'Selamat Datang Kembali',
+    'login_subtitle' => 'Masuk ke akun Overlander-mu',
+    'continue_google' => 'Lanjutkan dengan Google',
+    'or_login_email' => 'atau masuk dengan email',
+    'email' => 'Email',
+    'password' => 'Kata Sandi',
+    'remember_me' => 'Ingat saya',
+    'login' => 'Masuk',
+    'logging_in' => 'Sedang masuk...',
+    'no_account' => 'Belum punya akun?',
+    'sign_up_now' => 'Daftar sekarang',
+
+    'create_account' => 'Buat Akun',
+    'register_subtitle' => 'Gabung dengan Overlander dan mulai jelajahi destinasi terbaik Indonesia',
+    'sign_up_google' => 'Daftar dengan Google',
+    'or_sign_up_email' => 'atau daftar dengan email',
+    'full_name' => 'Nama Lengkap',
+    'confirm_password' => 'Konfirmasi Kata Sandi',
+    'creating_account' => 'Membuat akun...',
+    'have_account' => 'Sudah punya akun?',
+
+    'verify_title' => 'Verifikasi Emailmu',
+    'verify_sent' => 'Kami sudah mengirim link verifikasi ke',
+    'check_spam' => 'Tidak ada di kotak masuk? Cek folder Spam atau Promosi.',
+    'resend' => 'Kirim Ulang Email Verifikasi',
+    'open' => 'Buka',
+    'password_placeholder' => 'Kata sandimu',
+    'name_placeholder' => 'Namamu',
+    'min_chars_placeholder' => 'Minimal 8 karakter',
+    'repeat_password_placeholder' => 'Ulangi kata sandi',
+    'logout' => 'Keluar',
+];

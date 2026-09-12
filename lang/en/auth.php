@@ -1,0 +1,35 @@
+<?php
+
+return [
+    'welcome_back' => 'Welcome Back',
+    'login_subtitle' => 'Login to your Overlander account',
+    'continue_google' => 'Continue with Google',
+    'or_login_email' => 'or login with email',
+    'email' => 'Email',
+    'password' => 'Password',
+    'remember_me' => 'Remember me',
+    'login' => 'Login',
+    'logging_in' => 'Logging in...',
+    'no_account' => "Don't have an account?",
+    'sign_up_now' => 'Sign up now',
+
+    'create_account' => 'Create Account',
+    'register_subtitle' => "Join Overlander and start exploring Indonesia's best destinations",
+    'sign_up_google' => 'Sign up with Google',
+    'or_sign_up_email' => 'or sign up with email',
+    'full_name' => 'Full Name',
+    'confirm_password' => 'Confirm Password',
+    'creating_account' => 'Creating account...',
+    'have_account' => 'Already have an account?',
+
+    'verify_title' => 'Verify Your Email',
+    'verify_sent' => "We've sent a verification link to",
+    'check_spam' => 'Not in your inbox? Check your Spam or Promotions folder.',
+    'resend' => 'Resend Verification Email',
+    'open' => 'Open',
+    'password_placeholder' => 'Your password',
+    'name_placeholder' => 'Your name',
+    'min_chars_placeholder' => 'At least 8 characters',
+    'repeat_password_placeholder' => 'Repeat password',
+    'logout' => 'Logout',
+];
