@@ -53,19 +53,7 @@
             </div>
         </div>
 
-        <div>
-            <p class="block text-sm font-medium text-gray-700 mb-2">{{ __('booking.payment_method') }} <span class="text-red-500">*</span></p>
-            <div class="flex gap-3">
-                <label class="flex-1 flex items-center gap-2 border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
-                    <input type="radio" name="payment_method" value="paypal" required>
-                    <span class="text-sm">{{ __('booking.paypal') }}</span>
-                </label>
-                <label class="flex-1 flex items-center gap-2 border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
-                    <input type="radio" name="payment_method" value="whatsapp">
-                    <span class="text-sm">{{ __('booking.confirm_whatsapp') }}</span>
-                </label>
-            </div>
-        </div>
+        <p class="text-xs text-gray-500 bg-gray-50 rounded-xl p-3">{{ __('booking.whatsapp_followup_note') }}</p>
 
         <button type="submit" class="w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
             {{ __('booking.send_request') }}

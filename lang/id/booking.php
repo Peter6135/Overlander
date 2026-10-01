@@ -23,6 +23,7 @@ return [
     'full_payment' => 'Bayar Lunas',
     'deposit' => 'DP',
     'pay_later' => 'Bayar Nanti',
+    'whatsapp_followup_note' => 'Website ini cuma buat lihat-lihat dan kirim permintaan booking — setelah kamu kirim, tim kami bakal follow up dan konfirmasi detail pembayaran langsung lewat WhatsApp.',
     'confirm_button' => 'Oke, Lanjut Konfirmasi',
     'fully_booked_js' => 'Sudah penuh untuk tanggal ini — silakan pilih tanggal lain.',
     'slots_left_limited_js' => 'Hanya tersisa :n slot untuk tanggal ini.',
@@ -67,6 +68,9 @@ return [
     'method_whatsapp' => 'WhatsApp',
     'payment_status_unpaid' => 'Belum Dibayar',
     'payment_status_paid' => 'Sudah Dibayar',
+    'continue_whatsapp' => 'Lanjut ke WhatsApp',
+    'whatsapp_message_package' => 'Halo, saya mau follow up reservasi #:id untuk :package (:plan), tanggal :date, :pax orang. Nama saya :name.',
+    'whatsapp_message_custom' => 'Halo, saya mau follow up permintaan trip custom #:id, rencana tanggal :date, :pax orang. Nama saya :name.',
 
     'email_heading' => 'Reservasi Dikonfirmasi',
     'email_trip_label' => 'Trip',

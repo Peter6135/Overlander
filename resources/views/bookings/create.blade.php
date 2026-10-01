@@ -72,38 +72,7 @@
             <textarea name="message" rows="3" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">{{ old('message') }}</textarea>
         </div>
 
-        <div>
-            <p class="block text-sm font-medium text-gray-700 mb-2">{{ __('booking.payment_method') }} <span class="text-red-500">*</span></p>
-            <div class="flex gap-3">
-                <label class="flex-1 flex items-center gap-2 border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
-                    <input type="radio" name="payment_method" value="paypal" @checked(old('payment_method') === 'paypal') required>
-                    <span class="text-sm">{{ __('booking.paypal') }}</span>
-                </label>
-                <label class="flex-1 flex items-center gap-2 border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
-                    <input type="radio" name="payment_method" value="whatsapp" @checked(old('payment_method') === 'whatsapp')>
-                    <span class="text-sm">{{ __('booking.confirm_whatsapp') }}</span>
-                </label>
-            </div>
-        </div>
-
-        <div>
-            <p class="block text-sm font-medium text-gray-700 mb-2">{{ __('booking.payment_scheme') }} <span class="text-red-500">*</span></p>
-            <div class="grid sm:grid-cols-3 gap-3">
-                <label class="flex items-center gap-2 border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
-                    <input type="radio" name="payment_scheme" value="full" @checked(old('payment_scheme', 'full') === 'full') required>
-                    <span class="text-sm">{{ __('booking.full_payment') }}</span>
-                </label>
-                <label class="flex items-center gap-2 border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
-                    <input type="radio" name="payment_scheme" value="deposit" @checked(old('payment_scheme') === 'deposit')>
-                    <span class="text-sm">{{ __('booking.deposit') }} ({{ config('booking.deposit_rate') * 100 }}%)</span>
-                </label>
-                <label class="flex items-center gap-2 border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
-                    <input type="radio" name="payment_scheme" value="paylater" @checked(old('payment_scheme') === 'paylater')>
-                    <span class="text-sm">{{ __('booking.pay_later') }}</span>
-                </label>
-            </div>
-            @error('payment_scheme') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
-        </div>
+        <p class="text-xs text-gray-500 bg-gray-50 rounded-xl p-3">{{ __('booking.whatsapp_followup_note') }}</p>
 
         <button type="submit" class="w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
             {{ __('booking.confirm_button') }}

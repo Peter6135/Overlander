@@ -39,7 +39,6 @@
                         <th class="text-left px-6 py-3 font-medium">Trip Date</th>
                         <th class="text-center px-6 py-3 font-medium">Pax</th>
                         <th class="text-right px-6 py-3 font-medium">Total</th>
-                        <th class="text-center px-6 py-3 font-medium">Payment Scheme</th>
                         <th class="text-center px-6 py-3 font-medium">Status</th>
                     </tr>
                 </thead>
@@ -57,7 +56,6 @@
                         <td class="px-6 py-3 text-gray-500">{{ $booking->trip_date->format('d M Y') }}</td>
                         <td class="px-6 py-3 text-center text-gray-700">{{ $booking->pax }}</td>
                         <td class="px-6 py-3 text-right text-gray-700">{{ $booking->total_price ? '$' . number_format($booking->total_price, 0) : '—' }}</td>
-                        <td class="px-6 py-3 text-center text-gray-500">{{ $booking->is_custom ? '—' : ucfirst($booking->payment_scheme) }}</td>
                         <td class="px-6 py-3">
                             <form method="POST" action="{{ route('admin.bookings.status', $booking) }}">
                                 @csrf @method('PATCH')
@@ -77,7 +75,7 @@
                         </td>
                     </tr>
                     @empty
-                    <tr><td colspan="7" class="px-6 py-12 text-center text-gray-400">No bookings yet.</td></tr>
+                    <tr><td colspan="6" class="px-6 py-12 text-center text-gray-400">No bookings yet.</td></tr>
                     @endforelse
                 </tbody>
             </table>

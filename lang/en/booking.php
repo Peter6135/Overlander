@@ -23,6 +23,7 @@ return [
     'full_payment' => 'Full Payment',
     'deposit' => 'Deposit',
     'pay_later' => 'Pay Later',
+    'whatsapp_followup_note' => "This site is for browsing and booking requests only — after you submit, our team will follow up and confirm payment details with you directly on WhatsApp.",
     'confirm_button' => 'We Got It, Lets Confirm',
     'fully_booked_js' => 'Fully booked for this date — please choose another date.',
     'slots_left_limited_js' => 'Only :n slot(s) left for this date.',
@@ -67,6 +68,9 @@ return [
     'method_whatsapp' => 'Whatsapp',
     'payment_status_unpaid' => 'Unpaid',
     'payment_status_paid' => 'Paid',
+    'continue_whatsapp' => 'Continue on WhatsApp',
+    'whatsapp_message_package' => "Hi, I'd like to follow up on my booking #:id for :package (:plan), on :date for :pax traveler(s). My name is :name.",
+    'whatsapp_message_custom' => "Hi, I'd like to follow up on my custom trip request #:id, planned around :date for :pax traveler(s). My name is :name.",
 
     'email_heading' => 'Booking Confirmed',
     'email_trip_label' => 'Trip',

@@ -84,7 +84,7 @@
                 <div>
                     <p class="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">{{ __('nav.footer_get_in_touch') }}</p>
                     <div class="space-y-2 text-sm text-neutral-400">
-                        <p>WhatsApp: +62 812-0000-0000</p>
+                        <p><a href="https://wa.me/{{ config('booking.whatsapp_number') }}" target="_blank" rel="noopener" class="hover:text-brand-400 transition-colors">WhatsApp: +62 812-0000-0000</a></p>
                         <p>Email: hello@overlander.id</p>
                         <p>Instagram: @theovrlndr</p>
                         <p>TikTok: @theovrlndr</p>

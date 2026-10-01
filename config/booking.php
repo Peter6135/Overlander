@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'deposit_rate' => 0.3,
+    // admin contact number, no + or spaces, used for wa.me links
+    'whatsapp_number' => '6281200000000',
 ];

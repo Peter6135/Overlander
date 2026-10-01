@@ -41,8 +41,6 @@ class BookingController extends Controller
             'guest_phone' => 'required|string|max:20',
             'trip_date' => 'required|date|after:today',
             'message' => 'nullable|string|max:1000',
-            'payment_method' => 'required|in:paypal,whatsapp',
-            'payment_scheme' => 'required|in:full,deposit,paylater',
         ]);
 
         $validator->after(function ($validator) use ($request, $package) {
@@ -56,15 +54,12 @@ class BookingController extends Controller
 
         $plan = $package->plans()->findOrFail($data['package_plan_id']);
         $totalPrice = $plan->price * $data['pax'];
-        $depositAmount = $data['payment_scheme'] === 'deposit'
-            ? round($totalPrice * config('booking.deposit_rate'), 2)
-            : null;
 
         $booking = auth()->user()->bookings()->create([
             ...$data,
             'package_id' => $package->id,
             'total_price' => $totalPrice,
-            'deposit_amount' => $depositAmount,
+            'payment_method' => 'whatsapp',
             'status' => 'pending',
         ]);
 
@@ -90,12 +85,12 @@ class BookingController extends Controller
             'trip_date' => 'required|date|after:today',
             'pax' => 'required|integer|min:1|max:20',
             'custom_request' => 'required|string|max:2000',
-            'payment_method' => 'required|in:paypal,whatsapp',
         ]);
 
         $booking = auth()->user()->bookings()->create([
             ...$data,
             'is_custom' => true,
+            'payment_method' => 'whatsapp',
             'status' => 'pending',
         ]);
 

@@ -443,6 +443,7 @@ class DemoDataSeeder extends Seeder
                 'guest_phone' => $member->phone,
                 'total_price' => 80,
                 'status' => 'confirmed',
+                'payment_method' => 'whatsapp',
                 'payment_status' => 'paid',
             ]
         );
@@ -452,6 +453,9 @@ class DemoDataSeeder extends Seeder
             ['name' => 'Naibort Silalahi', 'rating' => 5, 'comment' => 'The most memorable Borobudur trip, the guide really knew the history well.', 'destination' => 'Borobudur Temple'],
             ['name' => 'Amelia Putri', 'rating' => 4, 'comment' => "Ijen's blue fire gave me chills, worth it even with the night trek.", 'destination' => 'Ijen Crater'],
             ['name' => 'David Chen', 'rating' => 5, 'comment' => "The most exciting 7-day overland trip I've ever joined, the route covered everything.", 'destination' => null],
+            ['name' => 'Sarah Mitchell', 'rating' => 5, 'comment' => 'Watched the sunset at Tanah Lot and it was every bit as magical as the photos — the whole cliffside glows gold right as the tide comes in.', 'destination' => 'Tanah Lot Temple'],
+            ['name' => 'Marco Alessandri', 'rating' => 5, 'comment' => "Did the full 10-day Java-to-Bali overland and it was worth every hour in the van — ending the trip with sunset at Tanah Lot right after the Ijen blue fire trek felt like the perfect finale.", 'destination' => null],
+            ['name' => 'Yuki Tanaka', 'rating' => 4, 'comment' => 'Only had 4 days but still managed to catch the Bromo sunrise before flying out of Surabaya — perfect route for a short trip.', 'destination' => null],
         ];
         foreach ($reviews as $r) {
             Review::firstOrCreate(
