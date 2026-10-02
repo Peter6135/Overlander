@@ -1,2 +1,10 @@
 *
 !.gitignore
+!destinations/
+!destinations/**
+!events/
+!events/**
+!itineraries/
+!itineraries/**
+!packages/
+!packages/**
