@@ -8,11 +8,13 @@
     $waNumber = config('booking.whatsapp_number');
     $channels = [
         ['label' => __('contact.whatsapp'), 'value' => '+62 856-4103-4599', 'hint' => __('contact.whatsapp_hint'), 'href' => "https://wa.me/{$waNumber}?text=" . urlencode(__('nav.whatsapp_float_message')), 'highlight' => true],
-        ['label' => __('contact.email'), 'value' => 'hello@overlander.id', 'hint' => null, 'href' => 'mailto:hello@overlander.id', 'highlight' => false],
-        ['label' => __('contact.instagram'), 'value' => '@theovrlndr', 'hint' => null, 'href' => 'https://instagram.com/theovrlndr', 'highlight' => false],
-        ['label' => __('contact.tiktok'), 'value' => '@theovrlndr', 'hint' => null, 'href' => 'https://www.tiktok.com/@theovrlndr', 'highlight' => false],
-        ['label' => __('contact.facebook'), 'value' => 'The Overlander Indonesia', 'hint' => null, 'href' => null, 'highlight' => false],
+        ['label' => __('contact.email'), 'value' => config('booking.email'), 'hint' => null, 'href' => 'mailto:' . config('booking.email'), 'highlight' => false],
     ];
+    foreach (config('booking.socials') as $name => $social) {
+        if ($social) {
+            $channels[] = ['label' => __('contact.' . $name), 'value' => $social['label'], 'hint' => null, 'href' => $social['url'], 'highlight' => false];
+        }
+    }
 @endphp
 
 <div class="max-w-4xl mx-auto space-y-10">

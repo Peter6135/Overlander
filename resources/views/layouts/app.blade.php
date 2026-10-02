@@ -105,10 +105,12 @@
                     <p class="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">{{ __('nav.footer_get_in_touch') }}</p>
                     <div class="space-y-2 text-sm text-neutral-400">
                         <p><a href="https://wa.me/{{ config('booking.whatsapp_number') }}" target="_blank" rel="noopener" class="hover:text-brand-400 transition-colors">WhatsApp: +62 856-4103-4599</a></p>
-                        <p>Email: hello@overlander.id</p>
-                        <p>Instagram: @theovrlndr</p>
-                        <p>TikTok: @theovrlndr</p>
-                        <p>Facebook: The Overlander Indonesia</p>
+                        <p><a href="mailto:{{ config('booking.email') }}" class="hover:text-brand-400 transition-colors">Email: {{ config('booking.email') }}</a></p>
+                        @foreach(config('booking.socials') as $name => $social)
+                            @if($social)
+                            <p><a href="{{ $social['url'] }}" target="_blank" rel="noopener" class="hover:text-brand-400 transition-colors">{{ ucfirst($name) }}: {{ $social['label'] }}</a></p>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
