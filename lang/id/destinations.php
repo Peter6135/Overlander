@@ -10,6 +10,7 @@ return [
     'about_title' => 'Tentang Destinasi Ini',
     'what_to_do_title' => 'Apa yang Bisa Dilakukan di Sini?',
     'poi_title' => 'Keunikan / Hal Menarik',
+    'tips_title' => 'Tips Perjalanan',
     'activity_title' => 'Aktivitas',
 
     'reviews_title' => 'Ulasan Traveler',

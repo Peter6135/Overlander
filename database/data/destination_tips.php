@@ -1,0 +1,33 @@
+<?php
+
+// One tip per line. Shared by the add_tips migration (backfill) and DemoDataSeeder (fresh installs).
+return [
+    'mount-bromo' => [
+        'en' => "Dry season (roughly April to October) usually gives the clearest sunrise views; the rainy season often brings cloud and mud.\nIt gets very cold before dawn at the viewpoint, so bring a warm jacket, gloves, and a beanie.\nSunrise tours leave in the middle of the night and the viewpoint fills up fast, so arrive early for a good spot.\nBring a mask or buff for the dust and sulfur smoke near the crater.\nWear sturdy shoes: the sand is loose and the crater stairs are steep.",
+        'id' => "Musim kemarau (kira-kira April sampai Oktober) biasanya kasih sunrise paling jelas; musim hujan sering berawan dan berlumpur.\nSebelum subuh di viewpoint dingin banget, jadi bawa jaket tebal, sarung tangan, dan kupluk.\nTur sunrise berangkat tengah malam dan viewpoint cepat penuh, jadi datang lebih awal biar dapat tempat bagus.\nBawa masker atau buff buat debu dan asap belerang di dekat kawah.\nPakai sepatu yang kuat: pasirnya gembur dan tangga ke kawah curam.",
+    ],
+    'borobudur-temple' => [
+        'en' => "Go early, around opening time or sunrise, to avoid the heat and the biggest crowds.\nDress modestly with shoulders and knees covered: this is a sacred Buddhist site.\nRules for climbing the upper terraces (daily quotas, special footwear) can change, so check with us before your trip.\nBring water and sun protection; the stone steps get hot by midday.\nPlease do not touch the carvings or sit on the stupas.",
+        'id' => "Datang pagi, sekitar jam buka atau pas sunrise, biar nggak kepanasan dan nggak kena keramaian.\nPakai pakaian sopan yang menutup bahu dan lutut: ini tempat suci umat Buddha.\nAturan naik ke teras atas (kuota harian, alas kaki khusus) bisa berubah, jadi tanya kami dulu sebelum berangkat.\nBawa air minum dan pelindung matahari; anak tangga batunya panas pas siang.\nMohon jangan menyentuh relief atau duduk di atas stupa.",
+    ],
+    'ijen-crater' => [
+        'en' => "The hike starts in the middle of the night (around 1 to 2 AM) so you reach the crater rim while the blue fire is still visible in the dark. Allow roughly 1.5 to 2 hours for the climb.\nBring warm layers and a headlamp. A gas mask is essential for the sulfur fumes; masks can usually be rented at the trailhead.\nWhen the wind blows the fumes your way, follow your guide's instructions and stay away from the crater edge.\nWear sturdy shoes: the trail is steep and gravelly.\nThe summit is around 2,400 m. If you have asthma or heart problems, take it slowly and tell your guide.",
+        'id' => "Pendakian dimulai tengah malam (sekitar jam 1 sampai 2 pagi) supaya kamu sampai di bibir kawah saat blue fire masih kelihatan dalam gelap. Siapkan waktu kira-kira 1,5 sampai 2 jam buat naik.\nBawa baju hangat berlapis dan headlamp. Masker gas penting banget buat asap belerang; biasanya masker bisa disewa di pos awal.\nKalau angin meniup asap ke arahmu, ikuti arahan pemandu dan jauhi bibir kawah.\nPakai sepatu yang kuat: jalurnya curam dan berkerikil.\nPuncaknya sekitar 2.400 mdpl. Kalau punya asma atau masalah jantung, jalannya pelan-pelan dan kasih tahu pemandumu.",
+    ],
+    'tumpak-sewu-waterfall' => [
+        'en' => "Dry season (roughly May to October) is the safest time: the trail is less slippery and the water is clearer. In the rainy season the trail is muddy and the falls can turn brown.\nThe path down to the base is steep, with stairs and ladders. Wear shoes or sandals with good grip.\nYou will get wet near the falls: bring a waterproof bag for your phone and camera, and a change of clothes.\nGo in the morning for fewer people and better light.\nThe walk back up is tiring, so start early and take your time.",
+        'id' => "Musim kemarau (kira-kira Mei sampai Oktober) paling aman: jalurnya nggak terlalu licin dan airnya lebih jernih. Pas musim hujan jalur berlumpur dan air terjunnya bisa jadi cokelat.\nJalan turun ke dasar curam, ada tangga dan tangga besi. Pakai sepatu atau sandal yang cengkeramannya bagus.\nDi dekat air terjun kamu pasti basah: bawa tas anti air buat HP dan kamera, plus baju ganti.\nDatang pagi biar lebih sepi dan cahayanya bagus.\nJalan naik baliknya capek, jadi mulai lebih awal dan santai aja.",
+    ],
+    'malioboro-yogyakarta-palace' => [
+        'en' => "Late afternoon into the evening is when Malioboro is liveliest: good for street food and shopping.\nBargain politely for batik and souvenirs, and check prices before you order at street stalls.\nAgree on the fare first if you take a becak or andong.\nThe Kraton is best visited in the morning; check its opening hours, as it closes in the early afternoon.\nKeep your phone and wallet safe in the crowds.",
+        'id' => "Sore menjelang malam adalah waktu Malioboro paling ramai: pas buat jajan dan belanja.\nTawar dengan sopan buat batik dan oleh-oleh, dan cek harga dulu sebelum pesan di warung kaki lima.\nSepakati tarif di awal kalau naik becak atau andong.\nKraton paling enak dikunjungi pagi hari; cek jam bukanya karena tutup di awal siang.\nJaga HP dan dompet di keramaian.",
+    ],
+    'papuma-beach' => [
+        'en' => "Visit in the dry season for the best weather and the most colourful sunsets.\nThe south coast has strong waves: do not swim far from shore and follow the safety signs.\nThe rock outcrops can be slippery, so wear sandals or shoes with grip.\nBring sunscreen and plenty of water; there is little shade on the sand.",
+        'id' => "Datang pas musim kemarau buat cuaca terbaik dan sunset yang paling berwarna.\nPantai selatan ombaknya kuat: jangan berenang jauh dari tepi dan ikuti rambu keselamatan.\nBatu karangnya bisa licin, jadi pakai sandal atau sepatu yang cengkeramannya bagus.\nBawa tabir surya dan banyak air minum; di pasir hampir nggak ada tempat teduh.",
+    ],
+    'tanah-lot-temple' => [
+        'en' => "Come in the late afternoon for the sunset, but arrive early because it gets crowded.\nThe temple rock can only be reached on foot at low tide, so check the tide times.\nThe inner temple is reserved for worshippers; visitors enjoy it from outside.\nWear a sarong or sash, as at any Balinese temple; they are often available to borrow or rent at the entrance.",
+        'id' => "Datang sore buat sunset, tapi sampai lebih awal karena ramai banget.\nBatu karang candi cuma bisa dicapai jalan kaki pas air surut, jadi cek jadwal pasang surut.\nBagian dalam candi khusus untuk umat yang beribadah; pengunjung menikmatinya dari luar.\nPakai kain atau selendang seperti di pura Bali lainnya; biasanya bisa dipinjam atau disewa di pintu masuk.",
+    ],
+];

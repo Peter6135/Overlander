@@ -17,6 +17,7 @@ class Destination extends Model
         'description_en', 'description_id',
         'what_to_do_en', 'what_to_do_id',
         'point_of_interest_en', 'point_of_interest_id',
+        'tips_en', 'tips_id',
         'nature_level', 'culture_level', 'heritage_level',
         'cover_photo', 'is_active', 'created_by',
     ];
@@ -34,6 +35,11 @@ class Destination extends Model
     protected function pointOfInterest(): Attribute
     {
         return Attribute::get(fn () => $this->localized('point_of_interest'));
+    }
+
+    protected function tips(): Attribute
+    {
+        return Attribute::get(fn () => $this->localized('tips'));
     }
 
     protected function coverPhotoUrl(): Attribute

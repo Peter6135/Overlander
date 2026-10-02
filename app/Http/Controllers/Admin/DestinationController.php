@@ -99,6 +99,8 @@ class DestinationController extends Controller
             'what_to_do_id' => 'nullable|string',
             'point_of_interest_en' => 'nullable|string',
             'point_of_interest_id' => 'nullable|string',
+            'tips_en' => 'nullable|string',
+            'tips_id' => 'nullable|string',
             'nature_level' => 'nullable|integer|min:1|max:5',
             'culture_level' => 'nullable|integer|min:1|max:5',
             'heritage_level' => 'nullable|integer|min:1|max:5',

@@ -10,6 +10,7 @@ return [
     'about_title' => 'About This Destination',
     'what_to_do_title' => 'What We Do There?',
     'poi_title' => 'Unique / Point of Interest',
+    'tips_title' => 'Travel Tips',
     'activity_title' => 'Activity',
 
     'reviews_title' => 'Traveler Reviews',

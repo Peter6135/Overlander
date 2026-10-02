@@ -19,6 +19,7 @@ class SeoController extends Controller
             ['loc' => route('faq'), 'lastmod' => null],
             ['loc' => route('contact'), 'lastmod' => null],
             ['loc' => route('privacy'), 'lastmod' => null],
+            ['loc' => route('terms'), 'lastmod' => null],
         ]);
 
         Destination::where('is_active', true)->get()->each(fn ($d) => $urls->push(['loc' => route('destinations.show', $d), 'lastmod' => $d->updated_at]));

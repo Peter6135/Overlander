@@ -200,6 +200,8 @@ class DemoDataSeeder extends Seeder
             ],
         ];
 
+        $destinationTips = require database_path('data/destination_tips.php');
+
         $destinations = [];
         foreach ($destinationsData as $d) {
             $destination = Destination::firstOrCreate(
@@ -218,6 +220,8 @@ class DemoDataSeeder extends Seeder
                     'nature_level' => $d['nature'],
                     'culture_level' => $d['culture'],
                     'heritage_level' => $d['heritage'],
+                    'tips_en' => $destinationTips[Str::slug($d['name'])]['en'] ?? null,
+                    'tips_id' => $destinationTips[Str::slug($d['name'])]['id'] ?? null,
                     'cover_photo' => $d['cover_photo'] ?? $d['photo'],
                     'is_active' => $d['active'] ?? true,
                     'created_by' => $admin->id,

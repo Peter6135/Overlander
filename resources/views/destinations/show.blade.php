@@ -45,6 +45,18 @@
         </div>
         @endif
 
+        @php $tipLines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $destination->tips)))); @endphp
+        @if(count($tipLines))
+        <div class="rounded-2xl border border-brand-200 bg-brand-50/50 p-5">
+            <h2 class="text-lg font-bold text-gray-900 mb-3">{{ __('destinations.tips_title') }}</h2>
+            <ul class="space-y-2 text-sm text-gray-700 leading-relaxed">
+                @foreach($tipLines as $line)
+                <li class="flex gap-2"><span class="text-brand-500 shrink-0">✓</span><span>{{ $line }}</span></li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         @if($destination->activities->count())
         <div>
             <h2 class="text-lg font-bold text-gray-900 mb-4">{{ __('destinations.activity_title') }}</h2>

@@ -42,6 +42,7 @@ Route::get('/about', fn () => view('about'))->name('about');
 Route::get('/faq', fn () => view('faq'))->name('faq');
 Route::get('/contact', fn () => view('contact'))->name('contact');
 Route::get('/privacy', fn () => view('privacy'))->name('privacy');
+Route::get('/terms', fn () => view('terms'))->name('terms');
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
 

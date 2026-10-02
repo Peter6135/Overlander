@@ -8,6 +8,7 @@ return [
     'about' => 'Tentang Kami',
     'faq' => 'FAQ',
     'privacy' => 'Kebijakan Privasi',
+    'terms' => 'Syarat & Ketentuan',
     'contact' => 'Kontak',
     'whatsapp_chat' => 'Chat via WhatsApp',
     'whatsapp_float_message' => 'Halo Overlander, saya mau tanya soal paket wisatanya.',

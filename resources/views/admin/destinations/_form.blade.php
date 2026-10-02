@@ -58,6 +58,15 @@
         <textarea name="point_of_interest_id" rows="2" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">{{ old('point_of_interest_id', $destination->point_of_interest_id ?? '') }}</textarea>
     </div>
 
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Travel Tips <span class="text-xs text-gray-400">(English, one tip per line)</span></label>
+        <textarea name="tips_en" rows="5" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">{{ old('tips_en', $destination->tips_en ?? '') }}</textarea>
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Tips Perjalanan <span class="text-xs text-gray-400">(Indonesia, satu tips per baris)</span></label>
+        <textarea name="tips_id" rows="5" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">{{ old('tips_id', $destination->tips_id ?? '') }}</textarea>
+    </div>
+
     <div class="sm:col-span-2 grid grid-cols-3 gap-3">
         @foreach(['nature_level' => 'Nature Level', 'culture_level' => 'Culture Level', 'heritage_level' => 'Heritage Level'] as $field => $label)
         <div>

@@ -8,6 +8,7 @@ return [
     'about' => 'About Us',
     'faq' => 'FAQ',
     'privacy' => 'Privacy Policy',
+    'terms' => 'Terms of Service',
     'contact' => 'Contact',
     'whatsapp_chat' => 'Chat on WhatsApp',
     'whatsapp_float_message' => "Hi Overlander, I'd like to ask about your tour packages.",
