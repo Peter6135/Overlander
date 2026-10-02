@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $destination->name . ' — Overlander')
+@section('meta_description', str(strip_tags($destination->description ?? ''))->limit(160))
+@section('og_image', $destination->cover_photo_url)
 @section('main-class', '')
 
 @section('content')

@@ -4,6 +4,7 @@
     <a href="{{ route('packages.index') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.package') }}</a>
     <a href="{{ route('articles.index') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.blog') }}</a>
     <a href="{{ route('about') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.about') }}</a>
+    <span class="hidden lg:block"><a href="{{ route('faq') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.faq') }}</a></span>
 
     <form method="GET" action="{{ route('search') }}">
         <input type="text" name="q" placeholder="{{ __('nav.search_placeholder') }}"

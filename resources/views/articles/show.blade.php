@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $article->title . ' — Overlander')
+@section('meta_description', str(strip_tags($article->excerpt ?? ''))->limit(160))
+@section('og_image', $article->cover_photo_url)
 
 @section('content')
 <div class="max-w-3xl mx-auto space-y-6">

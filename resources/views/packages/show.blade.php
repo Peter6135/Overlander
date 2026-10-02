@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $package->name . ' — Overlander')
+@section('meta_description', str(strip_tags($package->description ?? ''))->limit(160))
+@section('og_image', $package->cover_photo_url)
 @section('main-class', '')
 
 @push('styles')
