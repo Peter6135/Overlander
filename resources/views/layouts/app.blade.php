@@ -98,6 +98,7 @@
                         <a href="{{ route('articles.index') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.footer_blog') }}</a>
                         <a href="{{ route('about') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.about') }}</a>
                         <a href="{{ route('faq') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.faq') }}</a>
+                        <a href="{{ route('contact') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.contact') }}</a>
                     </div>
                 </div>
                 <div>

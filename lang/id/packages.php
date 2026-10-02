@@ -32,4 +32,11 @@ return [
     'travelers_label' => 'Jumlah Peserta (pax)',
     'add_to_cart' => 'Tambah ke Keranjang & Tinjau',
     'login_to_book' => 'Masuk untuk Memesan',
+
+    'included_title' => 'Yang Termasuk',
+    'included_feature' => 'Fasilitas',
+    'cancellation_title' => 'Pemesanan & Pembatalan',
+    'cancellation_1' => 'Kamu bisa edit atau batalin reservasi lewat menu Reservasi Saya paling lambat 14 hari sebelum tanggal trip.',
+    'cancellation_2' => 'Kalau sudah kurang dari 14 hari sebelum berangkat, perubahan dan pembatalan ditangani tim kami lewat WhatsApp.',
+    'cancellation_3' => 'Pembayaran diatur langsung dengan tim kami lewat WhatsApp setelah permintaanmu kami terima.',
 ];

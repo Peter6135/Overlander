@@ -175,6 +175,52 @@
             </div>
         </div>
         @endif
+
+        @php
+            $featureRows = $package->plans->pluck('features')->flatten()->filter()->unique()->values();
+        @endphp
+        @if($featureRows->isNotEmpty())
+        <div>
+            <h2 class="text-lg font-bold text-gray-900 mb-4">{{ __('packages.included_title') }}</h2>
+            <div class="overflow-x-auto rounded-2xl border border-gray-200">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-500">{{ __('packages.included_feature') }}</th>
+                            @foreach($package->plans as $plan)
+                                <th class="px-4 py-3 text-center font-semibold text-gray-800">{{ $plan->name }}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        @foreach($featureRows as $feature)
+                        <tr class="transition-colors hover:bg-gray-50">
+                            <td class="px-4 py-3 text-gray-700">{{ $feature }}</td>
+                            @foreach($package->plans as $plan)
+                                <td class="px-4 py-3 text-center">
+                                    @if(in_array($feature, $plan->features ?? [], true))
+                                        <span class="text-green-600 font-bold">✓</span>
+                                    @else
+                                        <span class="text-gray-300">—</span>
+                                    @endif
+                                </td>
+                            @endforeach
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @endif
+
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+            <h2 class="text-lg font-bold text-gray-900 mb-3">{{ __('packages.cancellation_title') }}</h2>
+            <ul class="space-y-2 text-sm text-gray-600">
+                @foreach(['cancellation_1', 'cancellation_2', 'cancellation_3'] as $key)
+                <li class="flex gap-2"><span class="text-brand-500 shrink-0">•</span><span>{{ __('packages.' . $key) }}</span></li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 
     <div class="space-y-4">

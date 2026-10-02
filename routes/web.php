@@ -39,6 +39,7 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 
 Route::get('/about', fn () => view('about'))->name('about');
 Route::get('/faq', fn () => view('faq'))->name('faq');
+Route::get('/contact', fn () => view('contact'))->name('contact');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 

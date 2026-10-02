@@ -7,6 +7,7 @@ return [
     'blog' => 'Blog',
     'about' => 'Tentang Kami',
     'faq' => 'FAQ',
+    'contact' => 'Kontak',
     'whatsapp_chat' => 'Chat via WhatsApp',
     'whatsapp_float_message' => 'Halo Overlander, saya mau tanya soal paket wisatanya.',
     'meta_description' => 'The Overlander Indonesia: rute overland pilihan di Jawa dan Bali, dari Borobudur dan Bromo sampai Tumpak Sewu dan Ijen. Rencanakan perjalananmu dan pesan lewat WhatsApp.',

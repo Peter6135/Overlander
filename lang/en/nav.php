@@ -7,6 +7,7 @@ return [
     'blog' => 'Blog',
     'about' => 'About Us',
     'faq' => 'FAQ',
+    'contact' => 'Contact',
     'whatsapp_chat' => 'Chat on WhatsApp',
     'whatsapp_float_message' => "Hi Overlander, I'd like to ask about your tour packages.",
     'meta_description' => 'The Overlander Indonesia: curated overland routes across Java and Bali, from Borobudur and Bromo to Tumpak Sewu and Ijen. Plan your trip and book via WhatsApp.',
