@@ -7,7 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    protected $fillable = ['destination_id', 'title', 'description_en', 'description_id', 'type', 'photo'];
+    protected $fillable = ['destination_id', 'title', 'title_id', 'description_en', 'description_id', 'type', 'photo'];
+
+    protected function title(): Attribute
+    {
+        return Attribute::get(function ($value, array $attributes) {
+            if (app()->getLocale() === 'id' && ! empty($attributes['title_id'])) {
+                return $attributes['title_id'];
+            }
+
+            return $value;
+        });
+    }
 
     protected function description(): Attribute
     {

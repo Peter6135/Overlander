@@ -111,17 +111,28 @@
     </div>
     <div id="activity-rows" class="space-y-3">
         @foreach(($destination->activities ?? []) as $activity)
-        <div class="grid grid-cols-1 sm:grid-cols-[2fr_1fr_3fr_3fr_auto] gap-2 items-start">
+        <div class="activity-row border border-gray-200 rounded-xl p-3 space-y-2">
             <input type="hidden" name="activity_photo_existing[]" value="{{ $activity->photo }}">
-            <input type="text" name="activity_title[]" value="{{ $activity->title }}" placeholder="Activity title" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-            <select name="activity_type[]" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-                @foreach(['tracking', 'tradition', 'adventure'] as $type)
-                    <option value="{{ $type }}" @selected($activity->type === $type)>{{ ucfirst($type) }}</option>
-                @endforeach
-            </select>
-            <input type="text" name="activity_description_en[]" value="{{ $activity->description_en }}" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-            <input type="text" name="activity_description_id[]" value="{{ $activity->description_id }}" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-            <button type="button" onclick="this.closest('div').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+            <div class="grid grid-cols-1 sm:grid-cols-[2fr_2fr_1fr_auto] gap-2 items-start">
+                <input type="text" name="activity_title[]" value="{{ $activity->getRawOriginal('title') }}" placeholder="Activity title (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                <input type="text" name="activity_title_id[]" value="{{ $activity->title_id }}" placeholder="Judul aktivitas (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                <select name="activity_type[]" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                    @foreach(['tracking', 'tradition', 'adventure'] as $type)
+                        <option value="{{ $type }}" @selected($activity->type === $type)>{{ ucfirst($type) }}</option>
+                    @endforeach
+                </select>
+                <button type="button" onclick="this.closest('.activity-row').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <input type="text" name="activity_description_en[]" value="{{ $activity->description_en }}" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                <input type="text" name="activity_description_id[]" value="{{ $activity->description_id }}" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+            </div>
+            <div class="flex items-center gap-3">
+                @if($activity->photo_url)
+                    <img src="{{ $activity->photo_url }}" class="h-12 w-20 rounded-lg object-cover" alt="">
+                @endif
+                <input type="file" name="activity_photo[]" accept="image/*" class="text-xs text-gray-500">
+            </div>
         </div>
         @endforeach
     </div>
@@ -131,18 +142,26 @@
 function addActivityRow() {
     const wrap = document.getElementById('activity-rows');
     const row = document.createElement('div');
-    row.className = 'grid grid-cols-1 sm:grid-cols-[2fr_1fr_3fr_3fr_auto] gap-2 items-start';
+    row.className = 'activity-row border border-gray-200 rounded-xl p-3 space-y-2';
     row.innerHTML = `
         <input type="hidden" name="activity_photo_existing[]" value="">
-        <input type="text" name="activity_title[]" placeholder="Activity title" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-        <select name="activity_type[]" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-            <option value="tracking">Tracking</option>
-            <option value="tradition">Tradition</option>
-            <option value="adventure">Adventure</option>
-        </select>
-        <input type="text" name="activity_description_en[]" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-        <input type="text" name="activity_description_id[]" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-        <button type="button" onclick="this.closest('div').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+        <div class="grid grid-cols-1 sm:grid-cols-[2fr_2fr_1fr_auto] gap-2 items-start">
+            <input type="text" name="activity_title[]" placeholder="Activity title (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+            <input type="text" name="activity_title_id[]" placeholder="Judul aktivitas (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+            <select name="activity_type[]" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                <option value="tracking">Tracking</option>
+                <option value="tradition">Tradition</option>
+                <option value="adventure">Adventure</option>
+            </select>
+            <button type="button" onclick="this.closest('.activity-row').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <input type="text" name="activity_description_en[]" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+            <input type="text" name="activity_description_id[]" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+        </div>
+        <div class="flex items-center gap-3">
+            <input type="file" name="activity_photo[]" accept="image/*" class="text-xs text-gray-500">
+        </div>
     `;
     wrap.appendChild(row);
 }

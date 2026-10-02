@@ -111,18 +111,27 @@ class DestinationController extends Controller
 
     private function syncActivities(Destination $destination, Request $request): void
     {
+        $existingPhotos = $request->input('activity_photo_existing', []);
+        $uploadedPhotos = $request->file('activity_photo', []);
+
         $destination->activities()->delete();
 
         foreach ($request->input('activity_title', []) as $i => $title) {
             if (blank($title)) continue;
 
+            $photo = ($existingPhotos[$i] ?? null) ?: null;
+            if (isset($uploadedPhotos[$i]) && $uploadedPhotos[$i]->isValid() && str_starts_with((string) $uploadedPhotos[$i]->getMimeType(), 'image/')) {
+                $photo = $uploadedPhotos[$i]->store('activities', 'public');
+            }
+
             Activity::create([
                 'destination_id' => $destination->id,
                 'title' => $title,
+                'title_id' => ($request->input('activity_title_id')[$i] ?? null) ?: null,
                 'type' => $request->input('activity_type')[$i] ?? 'adventure',
                 'description_en' => $request->input('activity_description_en')[$i] ?? null,
                 'description_id' => $request->input('activity_description_id')[$i] ?? null,
-                'photo' => ($request->input('activity_photo_existing')[$i] ?? null) ?: null,
+                'photo' => $photo,
             ]);
         }
     }

@@ -34,6 +34,7 @@ class DemoDataSeeder extends Seeder
 
         // ---------- Destinations ----------
         $ijenActivities = require database_path('data/ijen_activities.php');
+        $activityTitlesId = require database_path('data/activity_titles_id.php');
 
         $destinationsData = [
             [
@@ -237,7 +238,7 @@ class DemoDataSeeder extends Seeder
             foreach ($d['activities'] as $a) {
                 Activity::firstOrCreate(
                     ['destination_id' => $destination->id, 'title' => $a['title']],
-                    ['description_en' => $a['desc_en'], 'description_id' => $a['desc_id'], 'type' => $a['type'], 'photo' => $a['photo'] ?? $d['photo']]
+                    ['title_id' => $activityTitlesId[$a['title']] ?? null, 'description_en' => $a['desc_en'], 'description_id' => $a['desc_id'], 'type' => $a['type'], 'photo' => $a['photo'] ?? $d['photo']]
                 );
             }
 
