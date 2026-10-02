@@ -63,6 +63,7 @@
                     <input type="checkbox" name="remember" class="rounded border-gray-300 text-brand-500">
                     <span class="text-gray-600">{{ __('auth.remember_me') }}</span>
                 </label>
+                <a href="{{ route('password.request') }}" class="text-brand-500 hover:underline">{{ __('auth.forgot_password') }}</a>
             </div>
 
             <button type="submit" data-loading-text="{{ __('auth.logging_in') }}"
