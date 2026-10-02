@@ -65,6 +65,28 @@ button:disabled {
     cursor: not-allowed;
 }
 
+/* Tombol CTA reaktif saat hover */
+.btn-pop {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-pop:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+.btn-pop:active {
+    transform: scale(0.97);
+    transition-duration: 0.08s;
+}
+
+/* Link navigasi reaktif saat hover */
+.nav-link {
+    display: inline-block;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.nav-link:hover {
+    transform: translateY(-1px) scale(1.05);
+}
+
 /* Line clamp untuk bio */
 .line-clamp-2 {
     display: -webkit-box;

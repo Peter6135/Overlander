@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="relative h-80 sm:h-96">
-    <img src="{{ $destination->cover_photo }}" class="w-full h-full object-cover" alt="{{ $destination->name }}">
+    <img src="{{ $destination->cover_photo_url }}" class="w-full h-full object-cover" alt="{{ $destination->name }}">
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
     <div class="absolute bottom-0 left-0 right-0 max-w-6xl mx-auto px-4 pb-6 text-white">
         <div class="flex flex-wrap gap-2 mb-2">
@@ -82,7 +82,7 @@
                 </div>
                 <textarea name="comment" rows="2" placeholder="{{ __('destinations.review_placeholder') }}"
                           class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm mb-3 focus:border-brand-400 focus:ring-2 focus:ring-brand-100"></textarea>
-                <button type="submit" class="px-5 py-2 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600">{{ __('destinations.review_submit') }}</button>
+                <button type="submit" class="btn-pop px-5 py-2 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600">{{ __('destinations.review_submit') }}</button>
             </form>
             @else
             <p class="text-sm text-gray-500 mb-6">
@@ -145,7 +145,7 @@
 
         @if($destination->packages->isNotEmpty())
         <a href="{{ route('packages.show', $destination->packages->first()) }}"
-           class="block text-center px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
+           class="btn-pop block text-center px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
             {{ __('destinations.book_now') }}
         </a>
         @endif

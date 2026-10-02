@@ -10,10 +10,10 @@
 
     <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
         <div class="flex gap-4 p-5 border-b border-gray-100">
-            <img src="{{ $package->cover_photo }}" class="w-24 h-24 rounded-xl object-cover shrink-0" alt="{{ $package->name }}">
+            <img src="{{ $package->cover_photo_url }}" class="w-24 h-24 rounded-xl object-cover shrink-0" alt="{{ $package->name }}">
             <div>
                 <a href="{{ route('packages.show', $package) }}" class="font-semibold text-gray-900 hover:text-brand-500">{{ $package->name }}</a>
-                <p class="text-sm text-gray-500 mt-1">{{ $plan->name }} · ${{ number_format($plan->price, 0) }}/person</p>
+                <p class="text-sm text-gray-500 mt-1">{{ $plan->name }}</p>
             </div>
         </div>
 
@@ -25,25 +25,20 @@
                 <input type="number" name="pax" min="1" max="{{ $package->capacity ?? 20 }}" value="{{ $cart['pax'] }}" required
                        class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
             </div>
-            <button type="submit" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50">
+            <button type="submit" class="btn-pop px-4 py-2 border border-gray-300 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-50">
                 {{ __('cart.update') }}
             </button>
         </form>
-
-        <div class="p-5 flex items-center justify-between">
-            <span class="text-sm text-gray-500">{{ __('cart.subtotal') }}</span>
-            <span class="text-xl font-bold text-brand-600">${{ number_format($subtotal, 0) }}</span>
-        </div>
     </div>
 
     <div class="flex gap-3 mt-6">
         <a href="{{ route('bookings.create', $package) }}"
-           class="flex-1 text-center px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
+           class="btn-pop flex-1 text-center px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
             {{ __('cart.proceed') }}
         </a>
         <form method="POST" action="{{ route('cart.destroy') }}">
             @csrf @method('DELETE')
-            <button type="submit" data-no-loading class="px-6 py-3 border border-gray-300 text-gray-600 rounded-xl font-medium hover:bg-gray-50">
+            <button type="submit" data-no-loading class="btn-pop px-6 py-3 border border-gray-300 text-gray-600 rounded-xl font-medium hover:bg-gray-50">
                 {{ __('cart.clear') }}
             </button>
         </form>

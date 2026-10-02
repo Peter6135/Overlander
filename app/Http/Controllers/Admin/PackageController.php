@@ -73,8 +73,6 @@ class PackageController extends Controller
             $data['cover_photo'] = $request->file('cover_photo')->store('packages', 'public');
         }
 
-        $data['slug'] = Str::slug($data['name']);
-
         $package->update($data);
 
         $this->syncDestinations($package, $request);
@@ -104,6 +102,9 @@ class PackageController extends Controller
             'is_featured' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
             'capacity' => 'nullable|integer|min:1',
+            'duration_days' => 'nullable|integer|min:1',
+            'start_city' => 'nullable|string|max:100',
+            'end_city' => 'nullable|string|max:100',
         ]);
     }
 
@@ -142,10 +143,18 @@ class PackageController extends Controller
 
     private function syncItineraries(Package $package, Request $request): void
     {
+        $existingPhotos = $request->input('day_photo_existing', []);
+        $uploadedPhotos = $request->file('day_photo', []);
+
         $package->itineraries()->delete();
 
         foreach ($request->input('day_label_en', []) as $i => $label) {
             if (blank($label)) continue;
+
+            $photo = $existingPhotos[$i] ?? null;
+            if (isset($uploadedPhotos[$i]) && $uploadedPhotos[$i]->isValid()) {
+                $photo = $uploadedPhotos[$i]->store('itineraries', 'public');
+            }
 
             PackageItinerary::create([
                 'package_id' => $package->id,
@@ -153,6 +162,7 @@ class PackageController extends Controller
                 'day_label_id' => $request->input('day_label_id')[$i] ?? null,
                 'description_en' => $request->input('day_description_en')[$i] ?? null,
                 'description_id' => $request->input('day_description_id')[$i] ?? null,
+                'photo' => $photo,
                 'order' => $i,
             ]);
         }

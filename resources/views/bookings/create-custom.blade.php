@@ -55,7 +55,7 @@
 
         <p class="text-xs text-gray-500 bg-gray-50 rounded-xl p-3">{{ __('booking.whatsapp_followup_note') }}</p>
 
-        <button type="submit" class="w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
+        <button type="submit" class="btn-pop w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
             {{ __('booking.send_request') }}
         </button>
     </form>

@@ -64,7 +64,6 @@ class CategoryController extends Controller
 
         $category->update([
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
             'type' => $request->type,
             'icon' => $request->icon,
         ]);

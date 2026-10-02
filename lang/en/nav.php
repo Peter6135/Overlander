@@ -5,6 +5,7 @@ return [
     'destination' => 'Destination',
     'package' => 'Package',
     'blog' => 'Blog',
+    'about' => 'About Us',
     'search_placeholder' => 'Search...',
     'cart' => 'My Selection',
     'admin_panel' => 'Admin Panel',

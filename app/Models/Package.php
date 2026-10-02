@@ -15,6 +15,7 @@ class Package extends Model
     protected $fillable = [
         'category_id', 'name', 'slug', 'description_en', 'description_id',
         'cover_photo', 'is_featured', 'is_active', 'capacity', 'created_by',
+        'duration_days', 'start_city', 'end_city',
     ];
 
     protected function casts(): array
@@ -32,6 +33,24 @@ class Package extends Model
 
             return $this->attributes["description_{$locale}"] ?? $this->attributes['description_en'] ?? null;
         });
+    }
+
+    protected function coverPhotoUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            if (! $this->cover_photo) {
+                return null;
+            }
+
+            return str_starts_with($this->cover_photo, 'http') ? $this->cover_photo : asset('storage/' . $this->cover_photo);
+        });
+    }
+
+    public function galleryPhotoUrls(): array
+    {
+        $photos = $this->destinations->pluck('cover_photo_url')->filter()->unique()->values();
+
+        return $photos->isNotEmpty() ? $photos->all() : array_filter([$this->cover_photo_url]);
     }
 
     public function category()
@@ -79,5 +98,17 @@ class Package extends Model
             ->sum('pax');
 
         return max(0, $this->capacity - $booked);
+    }
+
+    public function hasAccommodationOption(): bool
+    {
+        return $this->plans->flatMap->features->contains(fn ($f) => str_contains(strtolower($f), 'accommodation'));
+    }
+
+    public function hasMealsOption(): bool
+    {
+        return $this->plans->flatMap->features->contains(
+            fn ($f) => str_contains(strtolower($f), 'meal') || str_contains(strtolower($f), 'snack')
+        );
     }
 }

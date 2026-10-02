@@ -25,12 +25,6 @@
             <td style="padding: 6px 0; color: #6b7280;">{{ __('booking.travelers') }}</td>
             <td style="padding: 6px 0; text-align: right;">{{ $booking->pax }}</td>
         </tr>
-        @if($booking->total_price)
-        <tr>
-            <td style="padding: 6px 0; color: #6b7280;">{{ __('booking.total_price') }}</td>
-            <td style="padding: 6px 0; text-align: right; font-weight: bold;">${{ number_format($booking->total_price, 0) }}</td>
-        </tr>
-        @endif
         <tr>
             <td style="padding: 6px 0; color: #6b7280;">Status</td>
             <td style="padding: 6px 0; text-align: right;">{{ __('booking.status_' . $booking->status) }}</td>

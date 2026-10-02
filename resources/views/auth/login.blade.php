@@ -66,7 +66,7 @@
             </div>
 
             <button type="submit" data-loading-text="{{ __('auth.logging_in') }}"
-                    class="w-full bg-brand-500 text-white py-2.5 rounded-lg font-semibold hover:bg-brand-600 transition-colors text-sm">
+                    class="btn-pop w-full bg-brand-500 text-white py-2.5 rounded-lg font-semibold hover:bg-brand-600 transition-colors text-sm">
                 {{ __('auth.login') }}
             </button>
         </form>

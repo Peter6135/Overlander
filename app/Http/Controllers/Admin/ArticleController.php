@@ -67,8 +67,6 @@ class ArticleController extends Controller
             $data['cover_photo'] = $request->file('cover_photo')->store('articles', 'public');
         }
 
-        $data['slug'] = Str::slug($data['title_en']);
-
         if ($request->boolean('is_published') && ! $article->is_published) {
             $data['published_at'] = now();
         } elseif (! $request->boolean('is_published')) {

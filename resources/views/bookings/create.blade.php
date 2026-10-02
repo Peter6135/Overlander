@@ -16,13 +16,12 @@
             <p class="block text-sm font-medium text-gray-700 mb-2">{{ __('booking.choose_plan') }} <span class="text-red-500">*</span></p>
             <div class="grid gap-3">
                 @foreach($package->plans as $plan)
-                <label class="flex items-center justify-between border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
+                <label class="flex items-center border rounded-xl p-3 cursor-pointer has-[:checked]:border-brand-400 has-[:checked]:bg-brand-50">
                     <span class="flex items-center gap-3">
                         <input type="radio" name="package_plan_id" value="{{ $plan->id }}"
                            @checked(old('package_plan_id', $cart['package_plan_id'] ?? null) == $plan->id || (! old('package_plan_id') && ! ($cart['package_plan_id'] ?? null) && $plan->is_recommended)) required>
                         <span class="text-sm font-medium text-gray-800">{{ $plan->name }}</span>
                     </span>
-                    <span class="text-brand-600 font-bold text-sm">${{ number_format($plan->price, 0) }}</span>
                 </label>
                 @endforeach
             </div>
@@ -74,7 +73,7 @@
 
         <p class="text-xs text-gray-500 bg-gray-50 rounded-xl p-3">{{ __('booking.whatsapp_followup_note') }}</p>
 
-        <button type="submit" class="w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
+        <button type="submit" class="btn-pop w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">
             {{ __('booking.confirm_button') }}
         </button>
     </form>

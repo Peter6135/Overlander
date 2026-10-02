@@ -6,6 +6,7 @@
         ['label' => 'Packages',   'route' => 'admin.packages.index',   'pattern' => 'admin.packages.*'],
         ['label' => 'Bookings',   'route' => 'admin.bookings.index',   'pattern' => 'admin.bookings.*'],
         ['label' => 'Articles',   'route' => 'admin.articles.index',   'pattern' => 'admin.articles.*'],
+        ['label' => 'Events',     'route' => 'admin.events.index',     'pattern' => 'admin.events.*'],
         ['label' => 'Categories', 'route' => 'admin.categories.index', 'pattern' => 'admin.categories.*'],
         ['label' => 'Reviews',    'route' => 'admin.reviews.index',    'pattern' => 'admin.reviews.*'],
     ];

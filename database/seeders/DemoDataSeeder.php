@@ -7,6 +7,7 @@ use App\Models\Activity;
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Destination;
+use App\Models\Event;
 use App\Models\Package;
 use App\Models\PackageItinerary;
 use App\Models\PackagePlan;
@@ -45,6 +46,7 @@ class DemoDataSeeder extends Seeder
                 'nature' => 5, 'culture' => 2, 'heritage' => 2,
                 'cats' => ['Nature', 'Mountain'],
                 'photo' => 'https://images.unsplash.com/photo-1548430065-53c58a6582dd?w=1200',
+                'cover_photo' => 'destinations/mount-bromo.jpg',
                 'activities' => [
                     [
                         'title' => 'Jeep Sunrise Tour', 'type' => 'adventure',
@@ -60,6 +62,7 @@ class DemoDataSeeder extends Seeder
             ],
             [
                 'name' => 'Borobudur Temple', 'location' => 'Magelang, Central Java, ID',
+                'active' => false,
                 'lat' => -7.6079, 'lng' => 110.2038,
                 'description_en' => "Borobudur isn't just old — it's the largest Buddhist temple on Earth, built over a thousand years ago by the Syailendra Dynasty and still standing as one of Indonesia's proudest landmarks. Walk its stone terraces at sunrise, when the mist is still clinging to the surrounding hills, and it's easy to feel like you've stepped into a different century.",
                 'description_id' => 'Borobudur bukan cuma tua — ini candi Buddha terbesar di dunia, dibangun lebih dari seribu tahun lalu sama Dinasti Syailendra dan masih berdiri megah jadi salah satu ikon paling dibanggakan Indonesia. Jalan-jalan di teras batunya pas sunrise, waktu kabut masih nyelimutin bukit-bukit sekitar, rasanya kayak beneran pindah ke zaman lain.',
@@ -70,6 +73,7 @@ class DemoDataSeeder extends Seeder
                 'nature' => 2, 'culture' => 5, 'heritage' => 5,
                 'cats' => ['Culture'],
                 'photo' => 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=1200',
+                'cover_photo' => 'destinations/borobudur-temple.jpg',
                 'activities' => [
                     [
                         'title' => 'Sunrise Tour', 'type' => 'tradition',
@@ -95,6 +99,7 @@ class DemoDataSeeder extends Seeder
                 'nature' => 5, 'culture' => 3, 'heritage' => 1,
                 'cats' => ['Nature', 'Mountain'],
                 'photo' => 'https://images.unsplash.com/photo-1578287595011-8c565dfc2ef8?w=1200',
+                'cover_photo' => 'destinations/ijen-crater.jpg',
                 'activities' => [
                     [
                         'title' => 'Blue Fire Trekking', 'type' => 'adventure',
@@ -115,6 +120,7 @@ class DemoDataSeeder extends Seeder
                 'nature' => 5, 'culture' => 1, 'heritage' => 1,
                 'cats' => ['Nature'],
                 'photo' => 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=1200',
+                'cover_photo' => 'destinations/tumpak-sewu.jpg',
                 'activities' => [
                     [
                         'title' => 'River Trekking', 'type' => 'adventure',
@@ -125,6 +131,7 @@ class DemoDataSeeder extends Seeder
             ],
             [
                 'name' => 'Malioboro & Yogyakarta Palace', 'location' => 'Yogyakarta, ID',
+                'active' => false,
                 'lat' => -7.7930, 'lng' => 110.3654,
                 'description_en' => 'If Yogyakarta has a heartbeat, it\'s here. Malioboro Street hums with street vendors, live music, and the smell of grilled satay well into the night, while just a short walk away, the centuries-old Sultan\'s Palace still holds onto royal traditions that outlived colonial rule.',
                 'description_id' => 'Kalau Yogyakarta punya detak jantung, ya di sini tempatnya. Jalan Malioboro rame sama pedagang kaki lima, musik jalanan, dan bau sate bakar sampai malam, sementara gak jauh dari situ, Keraton yang udah berumur ratusan tahun masih megang tradisi kerajaan yang bertahan lewat masa penjajahan.',
@@ -135,6 +142,7 @@ class DemoDataSeeder extends Seeder
                 'nature' => 1, 'culture' => 5, 'heritage' => 4,
                 'cats' => ['Culture'],
                 'photo' => 'https://images.unsplash.com/photo-1543874768-af0b9c4090d5?w=1200',
+                'cover_photo' => 'destinations/malioboro.jpg',
                 'activities' => [
                     [
                         'title' => 'Palace Heritage Tour', 'type' => 'tradition',
@@ -145,6 +153,7 @@ class DemoDataSeeder extends Seeder
             ],
             [
                 'name' => 'Papuma Beach', 'location' => 'Jember, East Java, ID',
+                'active' => false,
                 'lat' => -8.4283, 'lng' => 113.5350,
                 'description_en' => "Forget the postcard-perfect white sand for a second — Papuma's real showstopper is its coastline of giant, wind-carved rock formations rising straight out of the surf. Add a dramatic southern-sea backdrop and a turtle conservation program working quietly in the background, and you've got a beach with more character than most.",
                 'description_id' => 'Lupain dulu sejenak soal pasir putih kayak di kartu pos — daya tarik utama Papuma justru ada di garis pantainya yang dipenuhi batu karang raksasa hasil ukiran angin, berdiri tegak langsung dari ombak. Tambah lagi latar laut selatan yang dramatis dan program konservasi penyu yang jalan diam-diam di baliknya, jadilah pantai yang karakternya beda dari kebanyakan.',
@@ -165,6 +174,7 @@ class DemoDataSeeder extends Seeder
             ],
             [
                 'name' => 'Tanah Lot Temple', 'location' => 'Tabanan, Bali, ID',
+                'active' => false,
                 'lat' => -8.6212, 'lng' => 115.0868,
                 'description_en' => "Tanah Lot is Bali's most photographed temple for good reason — a small Hindu shrine perched dramatically on an offshore rock, surrounded by crashing waves that make it look like it's floating at high tide. Time your visit for sunset and you'll see why it's on every Bali bucket list.",
                 'description_id' => 'Tanah Lot jadi candi paling banyak difoto di Bali, dan emang pantas — kuil Hindu kecil yang berdiri dramatis di atas batu karang di tengah laut, dikelilingi ombak yang bikin dia keliatan kayak lagi mengambang pas air pasang. Datang pas sunset dan kamu bakal langsung ngerti kenapa ini masuk bucket list semua orang yang ke Bali.',
@@ -208,7 +218,8 @@ class DemoDataSeeder extends Seeder
                     'nature_level' => $d['nature'],
                     'culture_level' => $d['culture'],
                     'heritage_level' => $d['heritage'],
-                    'cover_photo' => $d['photo'],
+                    'cover_photo' => $d['cover_photo'] ?? $d['photo'],
+                    'is_active' => $d['active'] ?? true,
                     'created_by' => $admin->id,
                 ]
             );
@@ -235,6 +246,9 @@ class DemoDataSeeder extends Seeder
                 'description_id' => 'Satu sunrise, nol penyesalan. Bangun pagi buta, nonton sunrise legendaris Bromo dari Penanjakan, terus habiskan sisa paginya ngebut nyebrangin lautan pasir dan ngintip kawah yang masih ngebul sebelum pulang — semuanya dalam satu hari yang padat.',
                 'cover_photo' => $destinations['Mount Bromo']->cover_photo,
                 'is_featured' => true,
+                'duration_days' => 1,
+                'start_city' => 'Malang',
+                'end_city' => 'Malang',
                 'created_by' => $admin->id,
             ]
         );
@@ -249,7 +263,10 @@ class DemoDataSeeder extends Seeder
                 'name' => 'Bromo Sunrise Only',
                 'description_en' => "For when you just want the money shot without the extra hours. Straight to Penanjakan, straight to the best sunrise view in East Java, no detours.",
                 'description_id' => 'Buat kamu yang cuma mau moment terbaiknya aja tanpa buang-buang waktu. Langsung ke Penanjakan, langsung dapet pemandangan sunrise terbaik di Jawa Timur, tanpa muter-muter.',
-                'cover_photo' => $destinations['Mount Bromo']->cover_photo,
+                'cover_photo' => 'packages/bromo-sunrise-only.jpg',
+                'duration_days' => 1,
+                'start_city' => 'Malang',
+                'end_city' => 'Malang',
                 'created_by' => $admin->id,
             ]
         );
@@ -263,8 +280,11 @@ class DemoDataSeeder extends Seeder
                 'name' => 'Tumpak Sewu & Ijen Crater',
                 'description_en' => "Two of East Java's most jaw-dropping natural wonders, back to back: get soaked at the thundering tiers of Tumpak Sewu, then trade daylight for darkness as you chase Ijen's otherworldly blue fire.",
                 'description_id' => 'Dua keajaiban alam paling bikin melongo di Jawa Timur, digabung jadi satu: basah-basahan di air terjun bertingkat Tumpak Sewu yang menggelegar, terus tukar siang jadi malam buat ngejar blue fire Ijen yang kayak bukan dari bumi.',
-                'cover_photo' => $destinations['Tumpak Sewu Waterfall']->cover_photo,
+                'cover_photo' => 'packages/tumpak-sewu-kawah-ijen.jpg',
                 'is_featured' => true,
+                'duration_days' => 2,
+                'start_city' => 'Malang',
+                'end_city' => 'Banyuwangi',
                 'created_by' => $admin->id,
             ]
         );
@@ -282,8 +302,11 @@ class DemoDataSeeder extends Seeder
                 'name' => 'Jogja/Borobudur > Bromo > Tumpak Sewu > Ijen Crater',
                 'description_en' => 'The ultimate East Java overland run. Seven days, four unforgettable stops: sunrise over a thousand-year-old temple, a volcanic sand sea straight out of a sci-fi movie, a waterfall that dwarfs Niagara, and a fire that burns blue. Bring good shoes and an empty memory card.',
                 'description_id' => 'Rute overland Jawa Timur paling lengkap. Tujuh hari, empat destinasi yang gak bakal kelupa: sunrise di candi berumur seribu tahun, lautan pasir vulkanik yang kayak dari film sci-fi, air terjun yang bikin Niagara kalah, dan api yang nyalanya biru. Siapin sepatu yang nyaman dan memori kamera yang kosong.',
-                'cover_photo' => $destinations['Borobudur Temple']->cover_photo,
+                'cover_photo' => $destinations['Ijen Crater']->cover_photo,
                 'is_featured' => true,
+                'duration_days' => 7,
+                'start_city' => 'Yogyakarta',
+                'end_city' => 'Banyuwangi',
                 'created_by' => $admin->id,
             ]
         );
@@ -319,9 +342,12 @@ class DemoDataSeeder extends Seeder
                 'name' => 'Jogja/Borobudur > Bromo > Tumpak Sewu > Ijen Crater > Bali',
                 'description_en' => 'The full Java-to-Bali overland experience. Everything from the classic 7-day route, plus a ferry crossing over the Bali Strait and a few extra days to unwind in Bali, capped off with a golden sunset at Tanah Lot. Ten days, two islands, memories for a lifetime.',
                 'description_id' => 'Pengalaman overland lengkap dari Jawa sampai Bali. Semua yang ada di rute klasik 7 hari, ditambah nyebrang Selat Bali naik kapal feri dan beberapa hari ekstra buat santai-santai di Bali, ditutup sama sunset keemasan di Tanah Lot. Sepuluh hari, dua pulau, kenangan seumur hidup.',
-                'cover_photo' => $destinations['Borobudur Temple']->cover_photo,
+                'cover_photo' => $destinations['Tanah Lot Temple']->cover_photo,
                 'is_featured' => true,
                 'capacity' => 8,
+                'duration_days' => 10,
+                'start_city' => 'Yogyakarta',
+                'end_city' => 'Denpasar',
                 'created_by' => $admin->id,
             ]
         );
@@ -360,7 +386,10 @@ class DemoDataSeeder extends Seeder
                 'name' => 'Jogja/Borobudur > Bromo (Drop Malang/Surabaya)',
                 'description_en' => 'Short on time but not on adventure. Four days from Jogja to a Bromo sunrise you\'ll never forget, with a convenient drop-off in Malang or Surabaya so you can carry on your journey (or fly home) without doubling back.',
                 'description_id' => 'Waktu terbatas, petualangan tetap maksimal. Empat hari dari Jogja sampai sunrise Bromo yang gak bakal kelupa, dengan drop-off praktis di Malang atau Surabaya biar kamu bisa lanjut perjalanan (atau langsung pulang) tanpa harus balik arah.',
-                'cover_photo' => $destinations['Mount Bromo']->cover_photo,
+                'cover_photo' => $destinations['Malioboro & Yogyakarta Palace']->cover_photo,
+                'duration_days' => 4,
+                'start_city' => 'Yogyakarta',
+                'end_city' => 'Malang/Surabaya',
                 'created_by' => $admin->id,
             ]
         );
@@ -380,6 +409,116 @@ class DemoDataSeeder extends Seeder
         foreach ($malangSurabayaItineraries as $i => [$labelEn, $labelId, $descEn, $descId]) {
             PackageItinerary::firstOrCreate(
                 ['package_id' => $malangSurabaya->id, 'day_label_en' => $labelEn],
+                ['day_label_id' => $labelId, 'description_en' => $descEn, 'description_id' => $descId, 'order' => $i]
+            );
+        }
+
+        // Shortest variant: ends right after Bromo, no further stops, flexible self-arranged onward travel.
+        // Prices are demo placeholders — adjust to real costs.
+        $bromoDrop = Package::firstOrCreate(
+            ['slug' => 'jogja-borobudur-bromo-drop'],
+            [
+                'category_id' => $catByName('Overland')?->id,
+                'name' => 'Jogja/Borobudur > Bromo (Drop)',
+                'description_en' => "The essentials, nothing more. Three days covering Jogja's icons and a Bromo sunrise, then you're free to carry on your own way — no fixed onward drop-off, just the highlights done right.",
+                'description_id' => 'Yang penting-penting aja, gak pakai lama. Tiga hari nyakup ikon-ikon Jogja dan sunrise Bromo, abis itu kamu bebas lanjut sendiri — gak ada drop-off tetap, cuma highlight-nya aja yang digarap maksimal.',
+                'cover_photo' => 'packages/jogja-borobudur-bromo-drop.jpg',
+                'duration_days' => 3,
+                'start_city' => 'Yogyakarta',
+                'end_city' => 'Bromo',
+                'created_by' => $admin->id,
+            ]
+        );
+        $bromoDrop->destinations()->sync([
+            $destinations['Malioboro & Yogyakarta Palace']->id => ['order' => 0],
+            $destinations['Borobudur Temple']->id => ['order' => 1],
+            $destinations['Mount Bromo']->id => ['order' => 2],
+        ]);
+        PackagePlan::firstOrCreate(['package_id' => $bromoDrop->id, 'name' => 'Transportation Only'], ['price' => 150, 'features' => ['Transportation', 'Driver'], 'is_recommended' => false]);
+        PackagePlan::firstOrCreate(['package_id' => $bromoDrop->id, 'name' => 'All In Package'], ['price' => 220, 'features' => ['Transportation', 'Driver', 'Accommodation', 'Meals'], 'is_recommended' => true]);
+
+        $bromoDropItineraries = [
+            ['Day 1-2', 'Hari 1-2', 'Arrive in Jogja, city tour of Malioboro & the Palace, sunrise tour at Borobudur Temple.', 'Tiba di Jogja, city tour ke Malioboro & Keraton, sunrise tour di Candi Borobudur.'],
+            ['Day 3', 'Hari 3', 'Travel to Bromo, jeep sunrise tour at Penanjakan, explore the sand sea. Trip ends here, onward travel is on your own.', 'Perjalanan menuju Bromo, jeep sunrise tour di Penanjakan, jelajahi lautan pasir. Trip selesai di sini, lanjut perjalanan sendiri.'],
+        ];
+        foreach ($bromoDropItineraries as $i => [$labelEn, $labelId, $descEn, $descId]) {
+            PackageItinerary::firstOrCreate(
+                ['package_id' => $bromoDrop->id, 'day_label_en' => $labelEn],
+                ['day_label_id' => $labelId, 'description_en' => $descEn, 'description_id' => $descId, 'order' => $i]
+            );
+        }
+
+        // Mid-length variant: continues past Bromo to Tumpak Sewu, stops there (no Ijen, no Bali).
+        // Prices are demo placeholders — adjust to real costs.
+        $tumpakSewuDrop = Package::firstOrCreate(
+            ['slug' => 'jogja-borobudur-bromo-tumpak-sewu'],
+            [
+                'category_id' => $catByName('Overland')?->id,
+                'name' => 'Jogja/Borobudur > Bromo > Tumpak Sewu',
+                'description_en' => "Jogja's temples, Bromo's sunrise, and the thundering tiers of Tumpak Sewu — five days that hit three of Java's biggest highlights without stretching all the way to Ijen.",
+                'description_id' => 'Candi-candi Jogja, sunrise Bromo, dan gemuruh air terjun Tumpak Sewu — lima hari yang nyakup tiga highlight terbesar Jawa tanpa harus lanjut sampai Ijen.',
+                'cover_photo' => $destinations['Tumpak Sewu Waterfall']->cover_photo,
+                'duration_days' => 5,
+                'start_city' => 'Yogyakarta',
+                'end_city' => 'Tumpak Sewu',
+                'created_by' => $admin->id,
+            ]
+        );
+        $tumpakSewuDrop->destinations()->sync([
+            $destinations['Malioboro & Yogyakarta Palace']->id => ['order' => 0],
+            $destinations['Borobudur Temple']->id => ['order' => 1],
+            $destinations['Mount Bromo']->id => ['order' => 2],
+            $destinations['Tumpak Sewu Waterfall']->id => ['order' => 3],
+        ]);
+        PackagePlan::firstOrCreate(['package_id' => $tumpakSewuDrop->id, 'name' => 'Transportation Only'], ['price' => 280, 'features' => ['Transportation', 'Driver'], 'is_recommended' => false]);
+        PackagePlan::firstOrCreate(['package_id' => $tumpakSewuDrop->id, 'name' => 'All In Package'], ['price' => 400, 'features' => ['Transportation', 'Driver', 'Accommodation', 'Meals', 'Entrance Tickets'], 'is_recommended' => true]);
+
+        $tumpakSewuDropItineraries = [
+            ['Day 1-2', 'Hari 1-2', 'Arrive in Jogja, city tour of Malioboro & the Palace, sunrise tour at Borobudur Temple.', 'Tiba di Jogja, city tour ke Malioboro & Keraton, sunrise tour di Candi Borobudur.'],
+            ['Day 3-4', 'Hari 3-4', 'Travel to Bromo, jeep sunrise tour at Penanjakan, explore the sand sea.', 'Perjalanan menuju Bromo, jeep sunrise tour di Penanjakan, jelajahi lautan pasir.'],
+            ['Day 5', 'Hari 5', 'Trek Tumpak Sewu Waterfall. Trip ends here, onward travel is on your own.', 'Trekking ke Air Terjun Tumpak Sewu. Trip selesai di sini, lanjut perjalanan sendiri.'],
+        ];
+        foreach ($tumpakSewuDropItineraries as $i => [$labelEn, $labelId, $descEn, $descId]) {
+            PackageItinerary::firstOrCreate(
+                ['package_id' => $tumpakSewuDrop->id, 'day_label_en' => $labelEn],
+                ['day_label_id' => $labelId, 'description_en' => $descEn, 'description_id' => $descId, 'order' => $i]
+            );
+        }
+
+        // Same stops as the Tumpak Sewu variant above, but with an explicit drop-off day at Malang/Surabaya.
+        // Prices are demo placeholders — adjust to real costs.
+        $tumpakSewuMalangSurabaya = Package::firstOrCreate(
+            ['slug' => 'jogja-borobudur-bromo-tumpak-sewu-drop-malang-surabaya'],
+            [
+                'category_id' => $catByName('Overland')?->id,
+                'name' => 'Jogja/Borobudur > Bromo > Tumpak Sewu (Drop Malang/Surabaya)',
+                'description_en' => 'All the highlights of the Tumpak Sewu route — Jogja, Bromo, and the waterfall itself — wrapped up with a convenient drop-off in Malang or Surabaya so your next flight or train is one less thing to plan around.',
+                'description_id' => 'Semua highlight rute Tumpak Sewu — Jogja, Bromo, dan air terjunnya sendiri — ditutup dengan drop-off praktis di Malang atau Surabaya biar penerbangan atau kereta selanjutnya gak perlu dipusingin lagi.',
+                'cover_photo' => 'packages/jogja-borobudur-bromo-tumpak-sewu-drop-malang-surabaya.jpg',
+                'duration_days' => 6,
+                'start_city' => 'Yogyakarta',
+                'end_city' => 'Malang/Surabaya',
+                'created_by' => $admin->id,
+            ]
+        );
+        $tumpakSewuMalangSurabaya->destinations()->sync([
+            $destinations['Malioboro & Yogyakarta Palace']->id => ['order' => 0],
+            $destinations['Borobudur Temple']->id => ['order' => 1],
+            $destinations['Mount Bromo']->id => ['order' => 2],
+            $destinations['Tumpak Sewu Waterfall']->id => ['order' => 3],
+        ]);
+        PackagePlan::firstOrCreate(['package_id' => $tumpakSewuMalangSurabaya->id, 'name' => 'Transportation Only'], ['price' => 310, 'features' => ['Transportation', 'Driver'], 'is_recommended' => false]);
+        PackagePlan::firstOrCreate(['package_id' => $tumpakSewuMalangSurabaya->id, 'name' => 'All In Package'], ['price' => 440, 'features' => ['Transportation', 'Driver', 'Accommodation', 'Meals', 'Entrance Tickets'], 'is_recommended' => true]);
+
+        $tumpakSewuMalangSurabayaItineraries = [
+            ['Day 1-2', 'Hari 1-2', 'Arrive in Jogja, city tour of Malioboro & the Palace, sunrise tour at Borobudur Temple.', 'Tiba di Jogja, city tour ke Malioboro & Keraton, sunrise tour di Candi Borobudur.'],
+            ['Day 3-4', 'Hari 3-4', 'Travel to Bromo, jeep sunrise tour at Penanjakan, explore the sand sea.', 'Perjalanan menuju Bromo, jeep sunrise tour di Penanjakan, jelajahi lautan pasir.'],
+            ['Day 5', 'Hari 5', 'Trek Tumpak Sewu Waterfall.', 'Trekking ke Air Terjun Tumpak Sewu.'],
+            ['Day 6', 'Hari 6', "Drop-off at Malang or Surabaya (traveler's choice).", 'Drop-off di Malang atau Surabaya (sesuai pilihan traveler).'],
+        ];
+        foreach ($tumpakSewuMalangSurabayaItineraries as $i => [$labelEn, $labelId, $descEn, $descId]) {
+            PackageItinerary::firstOrCreate(
+                ['package_id' => $tumpakSewuMalangSurabaya->id, 'day_label_en' => $labelEn],
                 ['day_label_id' => $labelId, 'description_en' => $descEn, 'description_id' => $descId, 'order' => $i]
             );
         }
@@ -429,6 +568,40 @@ class DemoDataSeeder extends Seeder
                     'cover_photo' => $destinations['Mount Bromo']->cover_photo,
                     'is_published' => true,
                     'published_at' => now(),
+                ]
+            );
+        }
+
+        // ---------- Events (shown in homepage hero carousel) ----------
+        $events = [
+            [
+                'title_en' => 'Bromo Yadnya Kasada Festival',
+                'title_id' => 'Festival Yadnya Kasada Bromo',
+                'description_en' => "Once a year, the Tenggerese people climb to the rim of Bromo's crater at dawn to make offerings to the mountain — a centuries-old ceremony you can witness up close. We're running a special small-group trip timed around the festival dates, book early as spots fill fast.",
+                'description_id' => 'Setahun sekali, masyarakat Tengger naik ke bibir kawah Bromo saat subuh buat ngasih sesajen ke gunung — upacara berusia ratusan tahun yang bisa kamu saksikan langsung dari dekat. Kami buka trip grup kecil khusus pas tanggal festivalnya, buruan booking sebelum slotnya penuh.',
+                'cover_photo' => $destinations['Mount Bromo']->cover_photo,
+                'event_date' => '2027-06-15',
+            ],
+            [
+                'title_en' => 'Ijen Blue Fire Photography Trip',
+                'title_id' => 'Trip Foto Blue Fire Ijen',
+                'description_en' => "A special departure for photographers: extra time at the crater rim before sunrise, a slower pace, and a guide who knows exactly where the blue flames burn brightest. Bring a tripod.",
+                'description_id' => 'Keberangkatan khusus buat fotografer: waktu ekstra di bibir kawah sebelum subuh, ritme yang lebih santai, dan pemandu yang hafal betul titik blue fire paling terang. Jangan lupa bawa tripod.',
+                'cover_photo' => 'events/ijen-blue-fire-photography-trip.jpg',
+                'event_date' => '2026-11-20',
+            ],
+        ];
+        foreach ($events as $e) {
+            Event::firstOrCreate(
+                ['title_en' => $e['title_en']],
+                [
+                    'title_id' => $e['title_id'],
+                    'description_en' => $e['description_en'],
+                    'description_id' => $e['description_id'],
+                    'cover_photo' => $e['cover_photo'],
+                    'event_date' => $e['event_date'],
+                    'is_active' => true,
+                    'created_by' => $admin->id,
                 ]
             );
         }

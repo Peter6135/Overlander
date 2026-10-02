@@ -5,6 +5,7 @@ return [
     'destination' => 'Destinasi',
     'package' => 'Paket',
     'blog' => 'Blog',
+    'about' => 'Tentang Kami',
     'search_placeholder' => 'Cari...',
     'cart' => 'Pilihan Saya',
     'admin_panel' => 'Panel Admin',

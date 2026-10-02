@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Destination;
+use App\Models\Event;
 use App\Models\Package;
 use App\Models\Review;
 
@@ -36,8 +37,13 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
+        $upcomingEvents = Event::where('is_active', true)
+            ->orderBy('event_date')
+            ->take(3)
+            ->get();
+
         return view('home', compact(
-            'packageCategories', 'featuredPackages', 'featuredDestinations', 'testimonials', 'latestArticles'
+            'packageCategories', 'featuredPackages', 'featuredDestinations', 'testimonials', 'latestArticles', 'upcomingEvents'
         ));
     }
 }

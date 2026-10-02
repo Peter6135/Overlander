@@ -12,7 +12,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         @forelse($articles as $article)
         <a href="{{ route('articles.show', $article) }}" class="block rounded-2xl overflow-hidden border border-gray-100 provider-card">
-            <img src="{{ $article->cover_photo }}" class="w-full h-44 object-cover" alt="{{ $article->title }}">
+            <img src="{{ $article->cover_photo_url }}" class="w-full h-44 object-cover" alt="{{ $article->title }}">
             <div class="p-4">
                 @if($article->category)
                     <span class="text-xs px-2 py-0.5 rounded-full bg-brand-50 text-brand-600">{{ $article->category->name }}</span>

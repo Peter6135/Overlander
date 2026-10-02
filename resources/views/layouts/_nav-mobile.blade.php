@@ -3,6 +3,7 @@
     <a href="{{ route('destinations.index') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.destination') }}</a>
     <a href="{{ route('packages.index') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.package') }}</a>
     <a href="{{ route('articles.index') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.blog') }}</a>
+    <a href="{{ route('about') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.about') }}</a>
 
     <form method="GET" action="{{ route('search') }}" class="px-2 py-2">
         <input type="text" name="q" placeholder="{{ __('nav.search_placeholder') }}"
@@ -31,6 +32,6 @@
         </form>
     @else
         <a href="{{ route('login') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.login') }}</a>
-        <a href="{{ route('register') }}" class="block px-2 py-2 rounded-lg bg-brand-500 text-white text-center font-medium">{{ __('nav.sign_up') }}</a>
+        <a href="{{ route('register') }}" class="btn-pop block px-2 py-2 rounded-lg bg-brand-500 text-white text-center font-medium">{{ __('nav.sign_up') }}</a>
     @endauth
 </div>

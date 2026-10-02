@@ -8,7 +8,7 @@
     <p class="text-gray-500 text-sm mb-8 max-w-sm">You don't have permission to access this page.</p>
     <div class="flex gap-3">
         <a href="{{ route('home') }}"
-           class="px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-semibold hover:bg-brand-600 transition-colors">
+           class="btn-pop px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-semibold hover:bg-brand-600 transition-colors">
             Go Home
         </a>
         <button onclick="history.back()"

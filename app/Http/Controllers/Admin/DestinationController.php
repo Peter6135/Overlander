@@ -69,8 +69,6 @@ class DestinationController extends Controller
             $data['cover_photo'] = $request->file('cover_photo')->store('destinations', 'public');
         }
 
-        $data['slug'] = Str::slug($data['name']);
-
         $destination->update($data);
         $destination->categories()->sync($request->input('categories', []));
 

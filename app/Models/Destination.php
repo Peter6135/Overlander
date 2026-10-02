@@ -36,6 +36,17 @@ class Destination extends Model
         return Attribute::get(fn () => $this->localized('point_of_interest'));
     }
 
+    protected function coverPhotoUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            if (! $this->cover_photo) {
+                return null;
+            }
+
+            return str_starts_with($this->cover_photo, 'http') ? $this->cover_photo : asset('storage/' . $this->cover_photo);
+        });
+    }
+
     private function localized(string $field): ?string
     {
         $locale = app()->getLocale();

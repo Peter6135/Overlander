@@ -35,9 +35,8 @@ class CartController extends Controller
 
         $package = Package::with('plans')->findOrFail($cart['package_id']);
         $plan = $package->plans()->findOrFail($cart['package_plan_id']);
-        $subtotal = $plan->price * $cart['pax'];
 
-        return view('cart.show', compact('package', 'plan', 'subtotal', 'cart'));
+        return view('cart.show', compact('package', 'plan', 'cart'));
     }
 
     public function destroy()

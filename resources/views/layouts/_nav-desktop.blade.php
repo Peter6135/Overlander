@@ -1,8 +1,9 @@
 <div class="hidden sm:flex items-center gap-6 text-sm">
-    <a href="{{ route('home') }}" class="text-neutral-300 hover:text-white transition-colors">{{ __('nav.home') }}</a>
-    <a href="{{ route('destinations.index') }}" class="text-neutral-300 hover:text-white transition-colors">{{ __('nav.destination') }}</a>
-    <a href="{{ route('packages.index') }}" class="text-neutral-300 hover:text-white transition-colors">{{ __('nav.package') }}</a>
-    <a href="{{ route('articles.index') }}" class="text-neutral-300 hover:text-white transition-colors">{{ __('nav.blog') }}</a>
+    <a href="{{ route('home') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.home') }}</a>
+    <a href="{{ route('destinations.index') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.destination') }}</a>
+    <a href="{{ route('packages.index') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.package') }}</a>
+    <a href="{{ route('articles.index') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.blog') }}</a>
+    <a href="{{ route('about') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.about') }}</a>
 
     <form method="GET" action="{{ route('search') }}">
         <input type="text" name="q" placeholder="{{ __('nav.search_placeholder') }}"
@@ -16,7 +17,7 @@
     </div>
 
     @auth
-        <a href="{{ route('cart.show') }}" class="relative text-neutral-300 hover:text-white transition-colors" title="{{ __('nav.cart') }}">
+        <a href="{{ route('cart.show') }}" class="relative text-neutral-300 hover:text-white transition-all duration-200 hover:scale-125" title="{{ __('nav.cart') }}">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
             </svg>
@@ -25,7 +26,7 @@
             @endif
         </a>
         <div class="relative" id="user-menu-wrapper">
-            <button id="user-menu-btn" class="flex items-center gap-1.5 text-white font-medium">
+            <button id="user-menu-btn" class="flex items-center gap-1.5 text-white font-medium transition-colors hover:text-brand-400">
                 {{ auth()->user()->name }}
                 <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -46,7 +47,7 @@
             </div>
         </div>
     @else
-        <a href="{{ route('login') }}" class="text-neutral-300 hover:text-white transition-colors">{{ __('nav.login') }}</a>
-        <a href="{{ route('register') }}" class="bg-brand-500 text-white px-4 py-1.5 rounded-lg hover:bg-brand-600 transition-colors text-sm font-medium">{{ __('nav.sign_up') }}</a>
+        <a href="{{ route('login') }}" class="nav-link text-neutral-300 hover:text-white transition-colors">{{ __('nav.login') }}</a>
+        <a href="{{ route('register') }}" class="btn-pop bg-brand-500 text-white px-4 py-1.5 rounded-lg hover:bg-brand-600 transition-colors text-sm font-medium">{{ __('nav.sign_up') }}</a>
     @endauth
 </div>

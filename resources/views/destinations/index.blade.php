@@ -24,13 +24,13 @@
                 </a>
             @endforeach
         </div>
-        <button type="submit" class="px-4 py-2 bg-brand-500 text-white text-sm font-medium rounded-xl hover:bg-brand-600">{{ __('destinations.search') }}</button>
+        <button type="submit" class="btn-pop px-4 py-2 bg-brand-500 text-white text-sm font-medium rounded-xl hover:bg-brand-600">{{ __('destinations.search') }}</button>
     </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         @forelse($destinations as $destination)
         <a href="{{ route('destinations.show', $destination) }}" class="block rounded-2xl overflow-hidden border border-gray-100 provider-card">
-            <img src="{{ $destination->cover_photo }}" class="w-full h-44 object-cover" alt="{{ $destination->name }}">
+            <img src="{{ $destination->cover_photo_url }}" class="w-full h-44 object-cover" alt="{{ $destination->name }}">
             <div class="p-4">
                 <p class="font-semibold text-gray-800">{{ $destination->name }}</p>
                 <p class="text-xs text-gray-500">{{ $destination->location }}</p>

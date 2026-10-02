@@ -110,7 +110,7 @@
 
         <div class="flex gap-3">
             <button type="submit"
-                    class="px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600 transition-colors">
+                    class="btn-pop px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600 transition-colors">
                 {{ __('profile.save_changes') }}
             </button>
             <a href="{{ url()->previous() }}"

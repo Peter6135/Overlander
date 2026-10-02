@@ -88,7 +88,7 @@
             </div>
 
             <button type="submit" data-loading-text="{{ __('auth.creating_account') }}"
-                    class="w-full bg-brand-500 text-white py-2.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors text-sm">
+                    class="btn-pop w-full bg-brand-500 text-white py-2.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors text-sm">
                 {{ __('auth.create_account') }}
             </button>
         </form>

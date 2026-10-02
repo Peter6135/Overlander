@@ -50,7 +50,7 @@
                 <textarea name="message" rows="3" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">{{ old('message', $booking->message) }}</textarea>
             </div>
 
-            <button type="submit" class="w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">{{ __('booking.save_changes') }}</button>
+            <button type="submit" class="btn-pop w-full px-6 py-3 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors">{{ __('booking.save_changes') }}</button>
         </form>
     </div>
 </div>

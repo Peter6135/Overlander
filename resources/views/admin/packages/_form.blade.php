@@ -45,6 +45,23 @@
                placeholder="Leave blank for unlimited"
                class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
     </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Duration (days)</label>
+        <input type="number" min="1" name="duration_days" value="{{ old('duration_days', $package->duration_days ?? '') }}"
+               class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Start City</label>
+        <input type="text" name="start_city" value="{{ old('start_city', $package->start_city ?? '') }}"
+               placeholder="e.g. Yogyakarta"
+               class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">End City</label>
+        <input type="text" name="end_city" value="{{ old('end_city', $package->end_city ?? '') }}"
+               placeholder="e.g. Banyuwangi"
+               class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
+    </div>
     <div class="flex items-center gap-2">
         <input type="checkbox" name="is_featured" value="1" id="is_featured" @checked(old('is_featured', $package->is_featured ?? false))>
         <label for="is_featured" class="text-sm text-gray-700">Show on "Our Packages" homepage</label>
@@ -96,12 +113,23 @@
     </div>
     <div id="day-rows" class="space-y-3">
         @foreach(($package->itineraries ?? []) as $day)
-        <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_3fr_3fr_auto] gap-2 items-start">
-            <input type="text" name="day_label_en[]" value="{{ $day->day_label_en }}" placeholder="e.g. Day 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-            <input type="text" name="day_label_id[]" value="{{ $day->day_label_id }}" placeholder="cth. Hari 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-            <textarea name="day_description_en[]" rows="1" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">{{ $day->description_en }}</textarea>
-            <textarea name="day_description_id[]" rows="1" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">{{ $day->description_id }}</textarea>
-            <button type="button" onclick="this.closest('div').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+        <div class="border border-gray-200 rounded-xl p-3 space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-2 items-start">
+                <input type="text" name="day_label_en[]" value="{{ $day->day_label_en }}" placeholder="e.g. Day 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                <input type="text" name="day_label_id[]" value="{{ $day->day_label_id }}" placeholder="cth. Hari 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                <button type="button" onclick="this.closest('.border').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <textarea name="day_description_en[]" rows="1" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">{{ $day->description_en }}</textarea>
+                <textarea name="day_description_id[]" rows="1" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">{{ $day->description_id }}</textarea>
+            </div>
+            <div class="flex items-center gap-3">
+                @if($day->photo)
+                    <img src="{{ asset('storage/' . $day->photo) }}" class="w-16 h-16 rounded-lg object-cover shrink-0">
+                @endif
+                <input type="hidden" name="day_photo_existing[]" value="{{ $day->photo }}">
+                <input type="file" name="day_photo[]" accept="image/*" class="text-xs flex-1">
+            </div>
         </div>
         @endforeach
     </div>
@@ -126,13 +154,21 @@ function addPlanRow() {
 function addDayRow() {
     const wrap = document.getElementById('day-rows');
     const row = document.createElement('div');
-    row.className = 'grid grid-cols-1 sm:grid-cols-[1fr_1fr_3fr_3fr_auto] gap-2 items-start';
+    row.className = 'border border-gray-200 rounded-xl p-3 space-y-2';
     row.innerHTML = `
-        <input type="text" name="day_label_en[]" placeholder="e.g. Day 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-        <input type="text" name="day_label_id[]" placeholder="cth. Hari 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
-        <textarea name="day_description_en[]" rows="1" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm"></textarea>
-        <textarea name="day_description_id[]" rows="1" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm"></textarea>
-        <button type="button" onclick="this.closest('div').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+        <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-2 items-start">
+            <input type="text" name="day_label_en[]" placeholder="e.g. Day 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+            <input type="text" name="day_label_id[]" placeholder="cth. Hari 1-2" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
+            <button type="button" onclick="this.closest('.border').remove()" class="text-red-500 text-xs px-2 py-2">Delete</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <textarea name="day_description_en[]" rows="1" placeholder="Description (English)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm"></textarea>
+            <textarea name="day_description_id[]" rows="1" placeholder="Deskripsi (Indonesia)" class="border border-gray-300 rounded-xl px-3 py-2 text-sm"></textarea>
+        </div>
+        <div class="flex items-center gap-3">
+            <input type="hidden" name="day_photo_existing[]" value="">
+            <input type="file" name="day_photo[]" accept="image/*" class="text-xs flex-1">
+        </div>
     `;
     wrap.appendChild(row);
 }

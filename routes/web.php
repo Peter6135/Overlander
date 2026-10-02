@@ -37,7 +37,11 @@ Route::get('/packages/{package}/availability', [PackageController::class, 'avail
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
+Route::get('/about', fn () => view('about'))->name('about');
+
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 
 // Auth
 Route::middleware('guest')->group(function () {
@@ -118,6 +122,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('destinations', Admin\DestinationController::class)->except(['show']);
     Route::resource('packages', Admin\PackageController::class)->except(['show']);
     Route::resource('articles', Admin\ArticleController::class)->except(['show']);
+    Route::resource('events', Admin\EventController::class)->except(['show']);
 
     Route::get('/bookings', [Admin\BookingController::class, 'index'])->name('bookings.index');
     Route::patch('/bookings/{booking}/status', [Admin\BookingController::class, 'updateStatus'])->name('bookings.status');

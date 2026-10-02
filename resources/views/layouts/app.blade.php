@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('styles')
 </head>
 <body class="min-h-screen bg-white font-sans text-gray-800 overflow-x-hidden" style="font-family: 'Inter', sans-serif;">
 
@@ -16,9 +17,9 @@
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex items-center justify-between h-16">
 
-                <a href="{{ route('home') }}" class="flex items-baseline gap-1 shrink-0">
-                    <span class="text-xl font-black tracking-tight text-brand-500">THE</span>
-                    <span class="text-xl font-black tracking-tight text-white">OVRLNDR</span>
+                <a href="{{ route('home') }}" class="group flex items-baseline gap-1 shrink-0 transition-transform duration-300 hover:scale-105">
+                    <span class="text-xl font-black tracking-tight text-brand-500 transition-colors duration-300 group-hover:text-white">THE</span>
+                    <span class="text-xl font-black tracking-tight text-white transition-colors duration-300 group-hover:text-brand-500">OVRLNDR</span>
                 </a>
 
                 @include('layouts._nav-desktop')
@@ -79,6 +80,7 @@
                         <a href="{{ route('destinations.index') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.footer_destinations') }}</a>
                         <a href="{{ route('packages.index') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.footer_tour_packages') }}</a>
                         <a href="{{ route('articles.index') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.footer_blog') }}</a>
+                        <a href="{{ route('about') }}" class="block text-sm hover:text-brand-400 transition-colors">{{ __('nav.about') }}</a>
                     </div>
                 </div>
                 <div>

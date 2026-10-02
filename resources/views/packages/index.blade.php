@@ -23,13 +23,10 @@
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         @forelse($packages as $package)
         <a href="{{ route('packages.show', $package) }}" class="block rounded-2xl overflow-hidden border border-gray-100 provider-card">
-            <img src="{{ $package->cover_photo }}" class="w-full h-44 object-cover" alt="{{ $package->name }}">
+            <img src="{{ $package->cover_photo_url }}" class="w-full h-44 object-cover" alt="{{ $package->name }}">
             <div class="p-4">
                 <span class="text-xs px-2 py-0.5 rounded-full bg-brand-50 text-brand-600">{{ $package->category?->name }}</span>
                 <p class="font-semibold text-gray-800 mt-2 line-clamp-2">{{ $package->name }}</p>
-                @if($package->plans->isNotEmpty())
-                    <p class="text-brand-600 font-bold mt-1">${{ number_format($package->plans->min('price'), 0) }}<span class="text-xs text-gray-400 font-normal">/person</span></p>
-                @endif
             </div>
         </a>
         @empty
@@ -43,9 +40,9 @@
         <p class="font-semibold text-gray-800 mb-1">{{ __('packages.custom_title') }}</p>
         <p class="text-sm text-gray-500 mb-4">{{ __('packages.custom_subtitle') }}</p>
         @auth
-            <a href="{{ route('bookings.create-custom') }}" class="inline-block px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600">{{ __('packages.custom_cta') }}</a>
+            <a href="{{ route('bookings.create-custom') }}" class="btn-pop inline-block px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600">{{ __('packages.custom_cta') }}</a>
         @else
-            <a href="{{ route('login') }}" class="inline-block px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600">{{ __('packages.custom_cta_guest') }}</a>
+            <a href="{{ route('login') }}" class="btn-pop inline-block px-6 py-2.5 bg-brand-500 text-white rounded-xl text-sm font-medium hover:bg-brand-600">{{ __('packages.custom_cta_guest') }}</a>
         @endauth
     </div>
 </div>
