@@ -122,6 +122,7 @@ class DestinationController extends Controller
                 'type' => $request->input('activity_type')[$i] ?? 'adventure',
                 'description_en' => $request->input('activity_description_en')[$i] ?? null,
                 'description_id' => $request->input('activity_description_id')[$i] ?? null,
+                'photo' => ($request->input('activity_photo_existing')[$i] ?? null) ?: null,
             ]);
         }
     }

@@ -112,6 +112,7 @@
     <div id="activity-rows" class="space-y-3">
         @foreach(($destination->activities ?? []) as $activity)
         <div class="grid grid-cols-1 sm:grid-cols-[2fr_1fr_3fr_3fr_auto] gap-2 items-start">
+            <input type="hidden" name="activity_photo_existing[]" value="{{ $activity->photo }}">
             <input type="text" name="activity_title[]" value="{{ $activity->title }}" placeholder="Activity title" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
             <select name="activity_type[]" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
                 @foreach(['tracking', 'tradition', 'adventure'] as $type)
@@ -132,6 +133,7 @@ function addActivityRow() {
     const row = document.createElement('div');
     row.className = 'grid grid-cols-1 sm:grid-cols-[2fr_1fr_3fr_3fr_auto] gap-2 items-start';
     row.innerHTML = `
+        <input type="hidden" name="activity_photo_existing[]" value="">
         <input type="text" name="activity_title[]" placeholder="Activity title" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
         <select name="activity_type[]" class="border border-gray-300 rounded-xl px-3 py-2 text-sm">
             <option value="tracking">Tracking</option>

@@ -64,7 +64,7 @@
                 @foreach($destination->activities as $activity)
                 <div class="rounded-2xl overflow-hidden border border-gray-100">
                     @if($activity->photo)
-                        <img src="{{ $activity->photo }}" class="w-full h-32 object-cover" alt="">
+                        <img src="{{ $activity->photo_url }}" class="w-full h-32 object-cover" alt="{{ $activity->title }}">
                     @endif
                     <div class="p-4">
                         <span class="text-xs uppercase tracking-wide text-brand-500 font-semibold">{{ $activity->type }}</span>

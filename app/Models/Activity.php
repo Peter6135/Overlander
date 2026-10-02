@@ -18,6 +18,17 @@ class Activity extends Model
         });
     }
 
+    protected function photoUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            if (! $this->photo) {
+                return null;
+            }
+
+            return str_starts_with($this->photo, 'http') ? $this->photo : asset('storage/' . $this->photo);
+        });
+    }
+
     public function destination()
     {
         return $this->belongsTo(Destination::class);

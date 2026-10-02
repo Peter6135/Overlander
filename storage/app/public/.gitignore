@@ -8,3 +8,6 @@
 !itineraries/**
 !packages/
 !packages/**
+
+!activities/
+!activities/**

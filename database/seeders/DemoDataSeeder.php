@@ -33,6 +33,8 @@ class DemoDataSeeder extends Seeder
         $catByName = fn (string $name) => Category::where('name', $name)->first();
 
         // ---------- Destinations ----------
+        $ijenActivities = require database_path('data/ijen_activities.php');
+
         $destinationsData = [
             [
                 'name' => 'Mount Bromo', 'location' => 'East Java, ID',
@@ -105,7 +107,9 @@ class DemoDataSeeder extends Seeder
                         'title' => 'Blue Fire Trekking', 'type' => 'adventure',
                         'desc_en' => "A demanding but unforgettable pre-dawn hike, rewarded with a sight so blue and so strange you'll question if it's really fire.",
                         'desc_id' => "Pendakian dini hari yang lumayan berat tapi susah dilupain, dibayar sama pemandangan biru yang aneh banget sampai kamu bakal mikir 'ini beneran api?'.",
+                        'photo' => $ijenActivities['blue_fire_photo'],
                     ],
+                    ...$ijenActivities['new'],
                 ],
             ],
             [
@@ -233,7 +237,7 @@ class DemoDataSeeder extends Seeder
             foreach ($d['activities'] as $a) {
                 Activity::firstOrCreate(
                     ['destination_id' => $destination->id, 'title' => $a['title']],
-                    ['description_en' => $a['desc_en'], 'description_id' => $a['desc_id'], 'type' => $a['type'], 'photo' => $d['photo']]
+                    ['description_en' => $a['desc_en'], 'description_id' => $a['desc_id'], 'type' => $a['type'], 'photo' => $a['photo'] ?? $d['photo']]
                 );
             }
 
