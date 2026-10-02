@@ -89,9 +89,9 @@ return [
     'custom_need_something' => 'Pilih minimal satu destinasi atau ceritakan tripmu.',
     'custom_places_chosen' => 'Urutan yang diinginkan',
     'custom_route_title' => 'Rutemu, berurutan',
-    'custom_route_hint' => 'Tarik gagangnya (atau pakai tanda panah) buat ngubah urutan. Kami susun pemberhentiannya sesuai urutan ini sebisa mungkin.',
+    'custom_route_hint' => 'Tarik barisnya (atau pakai tanda panah) buat ngubah urutan. Kami susun pemberhentiannya sesuai urutan ini sebisa mungkin.',
     'custom_move_up' => 'Naikkan',
     'custom_move_down' => 'Turunkan',
     'custom_remove' => 'Hapus',
-    'custom_drag' => 'Tarik untuk mengubah urutan',
+    'custom_drag' => 'Tarik barisnya untuk mengubah urutan',
 ];

@@ -126,7 +126,7 @@
         b.setAttribute('aria-label', label);
         b.title = label;
         b.disabled = disabled;
-        b.className = 'w-7 h-7 rounded-lg border border-gray-200 bg-white text-gray-500 text-xs hover:border-brand-300 hover:text-brand-600 transition-colors disabled:opacity-30 disabled:hover:border-gray-200 disabled:hover:text-gray-500';
+        b.className = 'w-7 h-7 rounded-lg border border-gray-200 bg-white text-gray-500 text-xs cursor-pointer hover:border-brand-300 hover:text-brand-600 transition-colors disabled:opacity-30 disabled:hover:border-gray-200 disabled:hover:text-gray-500';
         b.addEventListener('click', onClick);
         return b;
     }
@@ -144,15 +144,19 @@
         list.innerHTML = '';
         route.forEach((id, idx) => {
             const li = document.createElement('li');
-            li.className = 'flex items-center gap-2 bg-white rounded-lg border border-gray-100 px-2 py-2 transition-shadow';
+            li.className = 'flex items-center gap-2 bg-white rounded-lg border border-gray-100 px-2 py-2 transition-shadow cursor-grab active:cursor-grabbing select-none touch-none';
+            // The whole row is the drag area; the small buttons keep working as plain clicks.
+            li.addEventListener('pointerdown', e => {
+                if (e.target.closest('button')) return;
+                startDrag(e, li, li);
+            });
             li.dataset.id = id;
 
             const handle = document.createElement('span');
             handle.textContent = '⋮⋮';
             handle.title = labels.drag;
             handle.setAttribute('aria-label', labels.drag);
-            handle.className = 'w-6 shrink-0 text-center text-gray-300 hover:text-brand-500 cursor-grab active:cursor-grabbing select-none touch-none leading-none';
-            handle.addEventListener('pointerdown', e => startDrag(e, li, handle));
+            handle.className = 'w-6 shrink-0 text-center text-gray-300 leading-none';
 
             const num = document.createElement('span');
             num.className = 'w-6 h-6 shrink-0 rounded-full bg-brand-500 text-white text-xs font-bold flex items-center justify-center';

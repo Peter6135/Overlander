@@ -89,9 +89,9 @@ return [
     'custom_need_something' => 'Pick at least one destination or describe your trip.',
     'custom_places_chosen' => 'Preferred route',
     'custom_route_title' => 'Your route, in order',
-    'custom_route_hint' => 'Drag the handle (or use the arrows) to change the order. We will plan the stops in this sequence where we can.',
+    'custom_route_hint' => 'Drag any row (or use the arrows) to change the order. We will plan the stops in this sequence where we can.',
     'custom_move_up' => 'Move up',
     'custom_move_down' => 'Move down',
     'custom_remove' => 'Remove',
-    'custom_drag' => 'Drag to reorder',
+    'custom_drag' => 'Drag the row to reorder',
 ];
