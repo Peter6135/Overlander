@@ -37,7 +37,10 @@ class Booking extends Model
 
     public function destinations()
     {
-        return $this->belongsToMany(Destination::class, 'booking_destination')->orderBy('name');
+        return $this->belongsToMany(Destination::class, 'booking_destination')
+            ->withPivot('order')
+            ->orderBy('booking_destination.order')
+            ->orderBy('destinations.name');
     }
 
     public function packagePlan()

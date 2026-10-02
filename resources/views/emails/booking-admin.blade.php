@@ -38,8 +38,8 @@
     @endif
 
     @if($booking->is_custom && $booking->destinations->isNotEmpty())
-    <p style="color: #6b7280; margin-bottom: 4px;">Places of interest</p>
-    <p style="margin-top: 0; font-weight: bold;">{{ $booking->destinations->pluck('name')->join(', ') }}</p>
+    <p style="color: #6b7280; margin-bottom: 4px;">Preferred route</p>
+    <p style="margin-top: 0; font-weight: bold;">{{ $booking->destinations->pluck('name')->join(' → ') }}</p>
     @endif
 
     @if($booking->custom_request)

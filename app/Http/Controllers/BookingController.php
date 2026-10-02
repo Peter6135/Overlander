@@ -109,7 +109,10 @@ class BookingController extends Controller
             'status' => 'pending',
         ]);
 
-        $booking->destinations()->sync($destinationIds);
+        // The submitted order is the traveler's preferred route.
+        $booking->destinations()->sync(
+            collect($destinationIds)->mapWithKeys(fn ($id, $i) => [$id => ['order' => $i + 1]])->all()
+        );
 
         $this->notifyAdmin($booking);
 

@@ -66,7 +66,7 @@
                         'pax' => $booking->pax,
                         'name' => $booking->guest_name,
                         'places' => $booking->destinations->isNotEmpty()
-                            ? "\n" . __('booking.custom_places_chosen') . ': ' . $booking->destinations->pluck('name')->join(', ')
+                            ? "\n" . __('booking.custom_places_chosen') . ': ' . $booking->destinations->pluck('name')->join(' → ')
                             : '',
                     ])
                     : __('booking.whatsapp_message_package', [
@@ -89,9 +89,12 @@
         @if($booking->is_custom && $booking->destinations->isNotEmpty())
         <div>
             <p class="text-gray-400 text-xs mb-2">{{ __('booking.custom_places_chosen') }}</p>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap items-center gap-2">
                 @foreach($booking->destinations as $place)
-                    <a href="{{ route('destinations.show', $place) }}" class="text-xs px-3 py-1 rounded-full bg-brand-50 text-brand-600 hover:bg-brand-100 transition-colors">{{ $place->name }}</a>
+                    <a href="{{ route('destinations.show', $place) }}" class="text-xs pl-1 pr-3 py-1 rounded-full bg-brand-50 text-brand-600 hover:bg-brand-100 transition-colors flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-brand-500 text-white text-[10px] font-bold flex items-center justify-center">{{ $loop->iteration }}</span>{{ $place->name }}
+                    </a>
+                    @unless($loop->last)<span class="text-gray-300">→</span>@endunless
                 @endforeach
             </div>
         </div>

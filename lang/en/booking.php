@@ -82,10 +82,15 @@ return [
     'email_footer_note' => 'Our team will reach out shortly to confirm the details. Safe travels!',
 
     'custom_places_label' => 'Pick places you would like to visit',
-    'custom_places_hint' => 'Optional. Tap the destinations you are interested in, one or several.',
+    'custom_places_hint' => 'Optional. Tap the destinations you are interested in. The order you tap is the order of your trip.',
     'custom_places_selected' => ':n selected',
     'custom_or_write' => 'Or describe your trip in your own words',
     'custom_details_optional' => 'Add anything else we should know',
     'custom_need_something' => 'Pick at least one destination or describe your trip.',
-    'custom_places_chosen' => 'Places of interest',
+    'custom_places_chosen' => 'Preferred route',
+    'custom_route_title' => 'Your route, in order',
+    'custom_route_hint' => 'Use the arrows to change the order. We will plan the stops in this sequence where we can.',
+    'custom_move_up' => 'Move up',
+    'custom_move_down' => 'Move down',
+    'custom_remove' => 'Remove',
 ];

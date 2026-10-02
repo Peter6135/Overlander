@@ -82,10 +82,15 @@ return [
     'email_footer_note' => 'Tim kami akan segera menghubungimu untuk konfirmasi detail. Selamat jalan-jalan!',
 
     'custom_places_label' => 'Pilih tempat yang ingin kamu kunjungi',
-    'custom_places_hint' => 'Opsional. Tap destinasi yang kamu minati, boleh satu atau beberapa.',
+    'custom_places_hint' => 'Opsional. Tap destinasi yang kamu minati. Urutan tap-mu jadi urutan tripmu.',
     'custom_places_selected' => ':n dipilih',
     'custom_or_write' => 'Atau ceritakan tripmu dengan kata-katamu sendiri',
     'custom_details_optional' => 'Tambahkan hal lain yang perlu kami tahu',
     'custom_need_something' => 'Pilih minimal satu destinasi atau ceritakan tripmu.',
-    'custom_places_chosen' => 'Tempat yang diminati',
+    'custom_places_chosen' => 'Urutan yang diinginkan',
+    'custom_route_title' => 'Rutemu, berurutan',
+    'custom_route_hint' => 'Pakai tanda panah buat ngubah urutan. Kami susun pemberhentiannya sesuai urutan ini sebisa mungkin.',
+    'custom_move_up' => 'Naikkan',
+    'custom_move_down' => 'Turunkan',
+    'custom_remove' => 'Hapus',
 ];
