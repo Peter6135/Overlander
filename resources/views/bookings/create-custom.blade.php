@@ -37,7 +37,7 @@
                 @endforeach
             </div>
             <div id="route-box" class="hidden mt-4 rounded-xl border border-brand-200 bg-brand-50/50 p-4"
-                 data-up="{{ __('booking.custom_move_up') }}" data-down="{{ __('booking.custom_move_down') }}" data-remove="{{ __('booking.custom_remove') }}">
+                 data-up="{{ __('booking.custom_move_up') }}" data-down="{{ __('booking.custom_move_down') }}" data-remove="{{ __('booking.custom_remove') }}" data-drag="{{ __('booking.custom_drag') }}">
                 <p class="text-xs font-semibold text-brand-700 mb-2">{{ __('booking.custom_route_title') }}</p>
                 <ol id="route-list" class="space-y-2"></ol>
                 <p class="text-[11px] text-gray-400 mt-2">{{ __('booking.custom_route_hint') }}</p>
@@ -111,7 +111,7 @@
     if (! inputs.length || ! box) return;
 
     const byId = Object.fromEntries(inputs.map(i => [i.dataset.id, i]));
-    const labels = { up: box.dataset.up, down: box.dataset.down, remove: box.dataset.remove };
+    const labels = { up: box.dataset.up, down: box.dataset.down, remove: box.dataset.remove, drag: box.dataset.drag };
 
     // Starts with whatever is already ticked (e.g. after a validation error), in page order.
     let route = inputs.filter(i => i.checked).map(i => i.dataset.id);
@@ -144,7 +144,15 @@
         list.innerHTML = '';
         route.forEach((id, idx) => {
             const li = document.createElement('li');
-            li.className = 'flex items-center gap-2 bg-white rounded-lg border border-gray-100 px-3 py-2';
+            li.className = 'flex items-center gap-2 bg-white rounded-lg border border-gray-100 px-2 py-2 transition-shadow';
+            li.dataset.id = id;
+
+            const handle = document.createElement('span');
+            handle.textContent = '⋮⋮';
+            handle.title = labels.drag;
+            handle.setAttribute('aria-label', labels.drag);
+            handle.className = 'w-6 shrink-0 text-center text-gray-300 hover:text-brand-500 cursor-grab active:cursor-grabbing select-none touch-none leading-none';
+            handle.addEventListener('pointerdown', e => startDrag(e, li, handle));
 
             const num = document.createElement('span');
             num.className = 'w-6 h-6 shrink-0 rounded-full bg-brand-500 text-white text-xs font-bold flex items-center justify-center';
@@ -154,7 +162,7 @@
             name.className = 'flex-1 text-sm text-gray-800';
             name.textContent = byId[id].dataset.name;
 
-            li.append(num, name,
+            li.append(handle, num, name,
                 button('↑', labels.up, idx === 0, () => move(idx, -1)),
                 button('↓', labels.down, idx === route.length - 1, () => move(idx, 1)),
                 button('×', labels.remove, false, () => { route.splice(idx, 1); render(); }));
@@ -169,6 +177,40 @@
             h.value = id;
             hidden.appendChild(h);
         });
+    }
+
+    function startDrag(e, li, handle) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        e.preventDefault();
+
+        try { handle.setPointerCapture(e.pointerId); } catch (err) { /* window listeners below still track the pointer */ }
+        li.classList.add('shadow-lg', 'ring-2', 'ring-brand-300', 'relative', 'z-10');
+
+        const onMove = ev => {
+            const others = Array.from(list.children).filter(x => x !== li);
+            const next = others.find(x => {
+                const r = x.getBoundingClientRect();
+                return ev.clientY < r.top + r.height / 2;
+            });
+
+            if (next) {
+                if (li.nextElementSibling !== next) list.insertBefore(li, next);
+            } else if (list.lastElementChild !== li) {
+                list.appendChild(li);
+            }
+        };
+
+        const onEnd = () => {
+            window.removeEventListener('pointermove', onMove);
+            window.removeEventListener('pointerup', onEnd);
+            window.removeEventListener('pointercancel', onEnd);
+            route = Array.from(list.children).map(x => x.dataset.id);
+            render();
+        };
+
+        window.addEventListener('pointermove', onMove);
+        window.addEventListener('pointerup', onEnd);
+        window.addEventListener('pointercancel', onEnd);
     }
 
     function move(idx, delta) {
