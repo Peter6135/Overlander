@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PackageController;
@@ -42,6 +43,7 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 
 Route::get('/about', fn () => view('about'))->name('about');
 Route::get('/faq', fn () => view('faq'))->name('faq');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/contact', fn () => view('contact'))->name('contact');
 Route::get('/privacy', fn () => view('privacy'))->name('privacy');
 Route::get('/terms', fn () => view('terms'))->name('terms');

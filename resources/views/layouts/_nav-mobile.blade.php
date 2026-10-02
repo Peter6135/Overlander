@@ -4,6 +4,7 @@
     <a href="{{ route('packages.index') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.package') }}</a>
     <a href="{{ route('articles.index') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.blog') }}</a>
     <a href="{{ route('about') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.about') }}</a>
+    <a href="{{ route('gallery') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.gallery') }}</a>
     <a href="{{ route('faq') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.faq') }}</a>
     <a href="{{ route('contact') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.contact') }}</a>
 

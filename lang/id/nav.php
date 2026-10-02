@@ -7,6 +7,7 @@ return [
     'blog' => 'Blog',
     'about' => 'Tentang Kami',
     'faq' => 'FAQ',
+    'gallery' => 'Galeri',
     'privacy' => 'Kebijakan Privasi',
     'terms' => 'Syarat & Ketentuan',
     'contact' => 'Kontak',

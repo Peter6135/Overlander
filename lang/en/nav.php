@@ -7,6 +7,7 @@ return [
     'blog' => 'Blog',
     'about' => 'About Us',
     'faq' => 'FAQ',
+    'gallery' => 'Gallery',
     'privacy' => 'Privacy Policy',
     'terms' => 'Terms of Service',
     'contact' => 'Contact',

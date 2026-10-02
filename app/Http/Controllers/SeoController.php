@@ -17,6 +17,7 @@ class SeoController extends Controller
             ['loc' => route('articles.index'), 'lastmod' => null],
             ['loc' => route('about'), 'lastmod' => null],
             ['loc' => route('faq'), 'lastmod' => null],
+            ['loc' => route('gallery'), 'lastmod' => null],
             ['loc' => route('contact'), 'lastmod' => null],
             ['loc' => route('privacy'), 'lastmod' => null],
             ['loc' => route('terms'), 'lastmod' => null],
