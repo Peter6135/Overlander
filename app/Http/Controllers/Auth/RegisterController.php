@@ -35,6 +35,7 @@ class RegisterController extends Controller
 
             try {
                 $user->sendEmailVerificationNotification();
+                \Log::error('DIAG mail: verification handed to mailer=' . config('mail.default') . ' from=' . config('mail.from.address') . ' gmail_client_id_set=' . (config('mail.mailers.gmail.client_id') ? 'yes' : 'no') . ' refresh_token_set=' . (config('mail.mailers.gmail.refresh_token') ? 'yes' : 'no'));
                 $message = __('flash.account_created');
             } catch (\Throwable $e) {
                 \Log::error('Email verification send failed: ' . $e->getMessage(), [
