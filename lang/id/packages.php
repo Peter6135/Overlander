@@ -39,4 +39,12 @@ return [
     'cancellation_1' => 'Kamu bisa edit atau batalin reservasi lewat menu Reservasi Saya paling lambat 14 hari sebelum tanggal trip.',
     'cancellation_2' => 'Kalau sudah kurang dari 14 hari sebelum berangkat, perubahan dan pembatalan ditangani tim kami lewat WhatsApp.',
     'cancellation_3' => 'Pembayaran diatur langsung dengan tim kami lewat WhatsApp setelah permintaanmu kami terima.',
+
+    'calendar_hint' => 'Pilih tanggal untuk cek ketersediaan.',
+    'calendar_available' => 'Tersedia',
+    'calendar_limited' => 'Hampir penuh',
+    'calendar_full' => 'Penuh',
+    'calendar_selected' => 'Tanggal dipilih',
+    'calendar_prev' => 'Bulan sebelumnya',
+    'calendar_next' => 'Bulan berikutnya',
 ];

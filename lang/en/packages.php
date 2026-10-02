@@ -39,4 +39,12 @@ return [
     'cancellation_1' => 'You can edit or cancel your reservation from My Bookings up to 14 days before the trip date.',
     'cancellation_2' => 'Within 14 days of departure, changes and cancellations are handled by our team on WhatsApp.',
     'cancellation_3' => 'Payment is arranged directly with our team on WhatsApp after your request is received.',
+
+    'calendar_hint' => 'Pick a date to check availability.',
+    'calendar_available' => 'Available',
+    'calendar_limited' => 'Few left',
+    'calendar_full' => 'Full',
+    'calendar_selected' => 'Selected date',
+    'calendar_prev' => 'Previous month',
+    'calendar_next' => 'Next month',
 ];

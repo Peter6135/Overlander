@@ -225,10 +225,31 @@
 
     <div class="space-y-4">
         <div class="bg-white rounded-2xl border border-gray-200 p-5">
-            <label for="availability-date" class="block text-sm font-medium text-gray-700 mb-1">{{ __('packages.check_availability_label') }}</label>
-            <input type="date" id="availability-date" min="{{ now()->addDay()->toDateString() }}"
-                   class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
-            <p id="availability-preview-msg" class="text-xs mt-2"></p>
+            <p class="text-sm font-medium text-gray-700 mb-3">{{ __('packages.check_availability_label') }}</p>
+
+            <div id="availability-calendar" data-url="{{ route('packages.availability.month', $package) }}" data-min="{{ now()->addDay()->toDateString() }}">
+                <div class="flex items-center justify-between mb-2">
+                    <button type="button" id="cal-prev" aria-label="{{ __('packages.calendar_prev') }}"
+                            class="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-30 disabled:hover:bg-transparent">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <p id="cal-title" class="text-sm font-semibold text-gray-800"></p>
+                    <button type="button" id="cal-next" aria-label="{{ __('packages.calendar_next') }}"
+                            class="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+                <div id="cal-weekdays" class="grid grid-cols-7 text-center text-[11px] font-medium text-gray-400 mb-1"></div>
+                <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
+
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-3 text-[11px] text-gray-500">
+                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>{{ __('packages.calendar_available') }}</span>
+                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>{{ __('packages.calendar_limited') }}</span>
+                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>{{ __('packages.calendar_full') }}</span>
+                </div>
+            </div>
+
+            <p id="availability-preview-msg" class="text-xs mt-3 text-gray-500">{{ __('packages.calendar_hint') }}</p>
         </div>
 
         <div class="bg-white rounded-2xl border border-gray-200 p-5">
@@ -237,6 +258,7 @@
             @auth
             <form method="POST" action="{{ route('cart.store', $package) }}">
                 @csrf
+                <input type="hidden" name="trip_date" data-calendar-field value="">
                 <div class="space-y-3">
                     @forelse($package->plans as $plan)
                     <label class="block border rounded-xl p-3 relative cursor-pointer transition-all duration-200 hover:border-brand-300 hover:shadow-md {{ $plan->is_recommended ? 'border-brand-400 bg-brand-50' : 'border-gray-200' }}">
@@ -352,35 +374,123 @@
 @push('scripts')
 <script>
 (function () {
-    const dateInput = document.getElementById('availability-date');
-    const msgEl = document.getElementById('availability-preview-msg');
-    if (! dateInput) return;
+    const root = document.getElementById('availability-calendar');
+    if (! root) return;
 
-    const availabilityUrl = '{{ route('packages.availability', $package) }}';
+    const grid = document.getElementById('cal-grid');
+    const weekdaysEl = document.getElementById('cal-weekdays');
+    const titleEl = document.getElementById('cal-title');
+    const prevBtn = document.getElementById('cal-prev');
+    const nextBtn = document.getElementById('cal-next');
+    const msgEl = document.getElementById('availability-preview-msg');
+    const dateFields = document.querySelectorAll('input[name="trip_date"][data-calendar-field]');
+
+    const monthUrl = root.dataset.url;
+    const minDate = root.dataset.min;
+    const locale = document.documentElement.lang || 'en';
     const i18n = {
         fullyBooked: @json(__('booking.fully_booked_js')),
         slotsLeft: @json(__('booking.slots_left_js')),
         noLimit: @json(__('packages.availability_no_limit_js')),
+        selected: @json(__('packages.calendar_selected')),
     };
 
-    dateInput.addEventListener('change', function () {
-        if (! dateInput.value) { msgEl.textContent = ''; return; }
+    const pad = n => String(n).padStart(2, '0');
+    const iso = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
+    const minParts = minDate.split('-').map(Number);
+    const minMonth = new Date(minParts[0], minParts[1] - 1, 1);
 
-        fetch(availabilityUrl + '?date=' + dateInput.value)
+    let view = new Date(minMonth);
+    let selected = null;
+    const cache = {};
+
+    // Monday-first weekday header, localized.
+    const monday = new Date(2024, 0, 1);
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const cell = document.createElement('div');
+        cell.textContent = d.toLocaleDateString(locale, { weekday: 'short' }).slice(0, 3);
+        weekdaysEl.appendChild(cell);
+    }
+
+    function loadMonth(date) {
+        const key = `${date.getFullYear()}-${pad(date.getMonth() + 1)}`;
+        if (cache[key]) return Promise.resolve(cache[key]);
+
+        return fetch(`${monthUrl}?month=${key}`)
             .then(res => res.json())
-            .then(data => {
-                if (data.remaining === null) {
-                    msgEl.textContent = i18n.noLimit;
-                    msgEl.className = 'text-xs mt-2 text-green-600';
-                } else if (data.remaining <= 0) {
-                    msgEl.textContent = i18n.fullyBooked;
-                    msgEl.className = 'text-xs mt-2 text-red-500';
-                } else {
-                    msgEl.textContent = i18n.slotsLeft.replace(':n', data.remaining);
-                    msgEl.className = 'text-xs mt-2 text-green-600';
-                }
-            });
-    });
+            .then(data => (cache[key] = data))
+            .catch(() => ({ capacity: null, days: {} }));
+    }
+
+    function render(data) {
+        const y = view.getFullYear();
+        const m = view.getMonth();
+        titleEl.textContent = view.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
+        prevBtn.disabled = view <= minMonth;
+        grid.innerHTML = '';
+
+        const offset = (new Date(y, m, 1).getDay() + 6) % 7;
+        for (let i = 0; i < offset; i++) grid.appendChild(document.createElement('div'));
+
+        const daysInMonth = new Date(y, m + 1, 0).getDate();
+        for (let d = 1; d <= daysInMonth; d++) {
+            const date = iso(y, m, d);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = d;
+
+            const remaining = data.capacity === null ? null : (date in data.days ? data.days[date] : data.capacity);
+            const isPast = date < minDate;
+            const isFull = remaining !== null && remaining <= 0;
+            const isLimited = remaining !== null && remaining > 0 && remaining <= Math.max(1, Math.ceil(data.capacity * 0.25));
+
+            let cls = 'relative h-8 rounded-lg text-xs font-medium transition-colors ';
+            if (isPast || isFull) {
+                cls += isFull && ! isPast ? 'bg-red-50 text-red-400 cursor-not-allowed line-through' : 'text-gray-300 cursor-not-allowed';
+                btn.disabled = true;
+            } else if (date === selected) {
+                cls += 'bg-brand-500 text-white';
+            } else {
+                cls += isLimited ? 'bg-amber-50 text-amber-700 hover:bg-amber-100' : 'text-gray-700 hover:bg-brand-50';
+            }
+            btn.className = cls;
+
+            if (! isPast && ! isFull && ! (date === selected)) {
+                const dot = document.createElement('span');
+                dot.className = 'absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ' + (isLimited ? 'bg-amber-400' : 'bg-green-500');
+                btn.appendChild(dot);
+            }
+
+            btn.addEventListener('click', () => select(date, remaining));
+            grid.appendChild(btn);
+        }
+    }
+
+    function select(date, remaining) {
+        selected = date;
+        dateFields.forEach(f => (f.value = date));
+
+        if (remaining === null) {
+            msgEl.textContent = i18n.noLimit;
+            msgEl.className = 'text-xs mt-3 text-green-600';
+        } else {
+            msgEl.textContent = i18n.slotsLeft.replace(':n', remaining);
+            msgEl.className = 'text-xs mt-3 text-green-600';
+        }
+
+        loadMonth(view).then(render);
+    }
+
+    function show() {
+        loadMonth(view).then(render);
+    }
+
+    prevBtn.addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); show(); });
+    nextBtn.addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); show(); });
+
+    show();
 })();
 </script>
 @endpush

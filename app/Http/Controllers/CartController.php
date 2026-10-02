@@ -12,6 +12,7 @@ class CartController extends Controller
         $data = $request->validate([
             'package_plan_id' => 'required|exists:package_plans,id',
             'pax' => 'required|integer|min:1|max:20',
+            'trip_date' => 'nullable|date|after:today',
         ]);
 
         $package->plans()->findOrFail($data['package_plan_id']);
@@ -20,6 +21,7 @@ class CartController extends Controller
             'package_id' => $package->id,
             'package_plan_id' => $data['package_plan_id'],
             'pax' => $data['pax'],
+            'trip_date' => $data['trip_date'] ?? ($request->session()->get('cart.trip_date')),
         ]]);
 
         return redirect()->route('cart.show');

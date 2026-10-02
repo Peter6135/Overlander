@@ -38,4 +38,16 @@ class PackageController extends Controller
             'remaining' => $package->remainingCapacity($request->date),
         ]);
     }
+
+    public function availabilityMonth(Request $request, Package $package)
+    {
+        $request->validate(['month' => 'required|date_format:Y-m']);
+
+        $month = \Illuminate\Support\Carbon::createFromFormat('Y-m-d', $request->month . '-01')->startOfDay();
+
+        return response()->json([
+            'capacity' => $package->capacity,
+            'days' => (object) $package->monthAvailability($month),
+        ]);
+    }
 }

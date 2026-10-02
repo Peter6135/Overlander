@@ -14,6 +14,9 @@
             <div>
                 <a href="{{ route('packages.show', $package) }}" class="font-semibold text-gray-900 hover:text-brand-500">{{ $package->name }}</a>
                 <p class="text-sm text-gray-500 mt-1">{{ $plan->name }}</p>
+                @if(! empty($cart['trip_date']))
+                    <p class="text-sm text-gray-500 mt-0.5">{{ __('booking.trip_date') }}: {{ \Illuminate\Support\Carbon::parse($cart['trip_date'])->format('d M Y') }}</p>
+                @endif
             </div>
         </div>
 

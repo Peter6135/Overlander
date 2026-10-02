@@ -85,6 +85,28 @@ class Package extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    /**
+     * Slots left per date for one month. Only dates that already have bookings appear;
+     * every other date still has the full capacity. Empty when capacity is unlimited.
+     *
+     * @return array<string, int>
+     */
+    public function monthAvailability(\Illuminate\Support\Carbon $month): array
+    {
+        if ($this->capacity === null) {
+            return [];
+        }
+
+        return $this->bookings()
+            ->whereBetween('trip_date', [$month->copy()->startOfMonth()->toDateString(), $month->copy()->endOfMonth()->toDateString()])
+            ->whereIn('status', ['pending', 'confirmed'])
+            ->selectRaw('DATE(trip_date) as day, SUM(pax) as booked')
+            ->groupBy('day')
+            ->pluck('booked', 'day')
+            ->map(fn ($booked) => max(0, $this->capacity - (int) $booked))
+            ->all();
+    }
+
     public function remainingCapacity(string $date, ?int $excludeBookingId = null): ?int
     {
         if ($this->capacity === null) {

@@ -35,6 +35,7 @@ Route::get('/destinations/{destination}', [DestinationController::class, 'show']
 Route::get('/packages', [PackageController::class, 'index'])->name('packages.index');
 Route::get('/packages/{package}', [PackageController::class, 'show'])->name('packages.show');
 Route::get('/packages/{package}/availability', [PackageController::class, 'availability'])->name('packages.availability');
+Route::get('/packages/{package}/availability-month', [PackageController::class, 'availabilityMonth'])->name('packages.availability.month');
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');

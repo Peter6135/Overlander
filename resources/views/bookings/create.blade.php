@@ -31,7 +31,7 @@
         <div class="grid sm:grid-cols-2 gap-3">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('booking.check_date') }} <span class="text-red-500">*</span></label>
-                <input type="date" id="trip_date" name="trip_date" value="{{ old('trip_date') }}" min="{{ now()->addDay()->toDateString() }}" required
+                <input type="date" id="trip_date" name="trip_date" value="{{ old('trip_date', $cart['trip_date'] ?? '') }}" min="{{ now()->addDay()->toDateString() }}" required
                        class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
                 @error('trip_date') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 <p id="availability-msg" class="text-xs mt-1"></p>
