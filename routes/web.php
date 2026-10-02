@@ -12,6 +12,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
@@ -50,6 +51,8 @@ Route::get('/privacy', fn () => view('privacy'))->name('privacy');
 Route::get('/terms', fn () => view('terms'))->name('terms');
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+Route::post('/newsletter', [NewsletterController::class, 'store'])->middleware('throttle:5,1')->name('newsletter.subscribe');
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
@@ -153,4 +156,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('/users', [Admin\UserAdminController::class, 'index'])->name('users.index');
     Route::delete('/users/{user}', [Admin\UserAdminController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/subscribers', [Admin\SubscriberAdminController::class, 'index'])->name('subscribers.index');
+    Route::get('/subscribers/export', [Admin\SubscriberAdminController::class, 'export'])->name('subscribers.export');
+    Route::delete('/subscribers/{subscriber}', [Admin\SubscriberAdminController::class, 'destroy'])->name('subscribers.destroy');
 });

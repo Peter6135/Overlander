@@ -10,6 +10,7 @@
         ['label' => 'Categories', 'route' => 'admin.categories.index', 'pattern' => 'admin.categories.*'],
         ['label' => 'Reviews',    'route' => 'admin.reviews.index',    'pattern' => 'admin.reviews.*'],
         ['label' => 'Users',      'route' => 'admin.users.index',      'pattern' => 'admin.users.*'],
+        ['label' => 'Subscribers','route' => 'admin.subscribers.index','pattern' => 'admin.subscribers.*'],
     ];
 @endphp
 

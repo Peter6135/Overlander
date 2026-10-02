@@ -89,6 +89,21 @@
                 <div>
                     <p class="text-xl font-black mb-2"><span class="text-brand-500">THE</span> <span class="text-white">OVRLNDR</span></p>
                     <p class="text-sm text-neutral-400 leading-relaxed">{{ __('nav.footer_tagline') }}</p>
+
+                    <form method="POST" action="{{ route('newsletter.subscribe') }}" class="mt-5">
+                        @csrf
+                        <p class="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">{{ __('newsletter.title') }}</p>
+                        <p class="text-xs text-neutral-500 mb-2">{{ __('newsletter.subtitle') }}</p>
+                        <input type="text" name="website" value="" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+                        <div class="flex gap-2">
+                            <input type="email" name="email" required placeholder="{{ __('newsletter.placeholder') }}" aria-label="{{ __('newsletter.placeholder') }}"
+                                   class="min-w-0 flex-1 bg-neutral-800 text-neutral-200 placeholder-neutral-500 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-brand-400">
+                            <button type="submit" data-no-loading class="btn-pop shrink-0 px-3 py-2 bg-brand-500 text-white rounded-lg text-xs font-semibold hover:bg-brand-600 transition-colors">{{ __('newsletter.cta') }}</button>
+                        </div>
+                        @error('email', 'newsletter')
+                            <p class="mt-1 text-xs text-red-400">{{ $message }}</p>
+                        @enderror
+                    </form>
                 </div>
                 <div>
                     <p class="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-3">{{ __('nav.footer_explore') }}</p>
