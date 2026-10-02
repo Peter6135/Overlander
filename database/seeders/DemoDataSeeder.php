@@ -22,7 +22,7 @@ class DemoDataSeeder extends Seeder
     {
         $admin = User::firstOrCreate(
             ['email' => 'admin@overlander.test'],
-            ['name' => 'Admin Overlander', 'password' => bcrypt('password'), 'is_admin' => true, 'email_verified_at' => now()]
+            ['name' => 'Admin Overlander', 'password' => bcrypt(env('DEMO_ADMIN_PASSWORD', 'password')), 'is_admin' => true, 'email_verified_at' => now()]
         );
 
         $member = User::firstOrCreate(
