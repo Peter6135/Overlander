@@ -7,6 +7,7 @@ return [
     'blog' => 'Blog',
     'about' => 'Tentang Kami',
     'faq' => 'FAQ',
+    'wishlist' => 'Paket Tersimpan',
     'gallery' => 'Galeri',
     'privacy' => 'Kebijakan Privasi',
     'terms' => 'Syarat & Ketentuan',

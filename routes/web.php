@@ -17,6 +17,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SeoController;
 use App\Http\Controllers\Settings;
+use App\Http\Controllers\WishlistController;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
@@ -113,6 +114,8 @@ Route::middleware(['auth', 'verified'])->prefix('settings')->name('settings.')->
 
 // Member: bookings & reviews — login required (per spec, non-members can only view)
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/{package}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::get('/bookings/custom/create', [BookingController::class, 'createCustom'])->name('bookings.create-custom');
     Route::post('/bookings/custom', [BookingController::class, 'storeCustom'])->name('bookings.store-custom');

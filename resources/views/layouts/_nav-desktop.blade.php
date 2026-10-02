@@ -38,6 +38,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600">{{ __('nav.admin_panel') }}</a>
                 @endif
                 <a href="{{ route('bookings.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600">{{ __('nav.my_bookings') }}</a>
+                <a href="{{ route('wishlist.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600">{{ __('nav.wishlist') }}</a>
                 <a href="{{ route('settings.profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600">{{ __('nav.profile_settings') }}</a>
                 <div class="border-t border-gray-100 mt-1 pt-1">
                     <form method="POST" action="{{ route('logout') }}">

@@ -22,13 +22,16 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         @forelse($packages as $package)
-        <a href="{{ route('packages.show', $package) }}" class="block rounded-2xl overflow-hidden border border-gray-100 provider-card">
-            <img src="{{ $package->cover_photo_url }}" class="w-full h-44 object-cover" alt="{{ $package->name }}">
-            <div class="p-4">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-brand-50 text-brand-600">{{ $package->category?->name }}</span>
-                <p class="font-semibold text-gray-800 mt-2 line-clamp-2">{{ $package->name }}</p>
-            </div>
-        </a>
+        <div class="relative">
+            <a href="{{ route('packages.show', $package) }}" class="block rounded-2xl overflow-hidden border border-gray-100 provider-card">
+                <img src="{{ $package->cover_photo_url }}" class="w-full h-44 object-cover" alt="{{ $package->name }}">
+                <div class="p-4">
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-brand-50 text-brand-600">{{ $package->category?->name }}</span>
+                    <p class="font-semibold text-gray-800 mt-2 line-clamp-2">{{ $package->name }}</p>
+                </div>
+            </a>
+            @include('_wishlist-heart', ['package' => $package, 'position' => 'absolute top-3 right-3 z-10'])
+        </div>
         @empty
         <p class="col-span-3 text-center text-gray-400 py-12">{{ __('packages.empty') }}</p>
         @endforelse

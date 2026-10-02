@@ -28,6 +28,7 @@
             <a href="{{ route('admin.dashboard') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.admin_panel') }}</a>
         @endif
         <a href="{{ route('bookings.index') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.my_bookings') }}</a>
+        <a href="{{ route('wishlist.index') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.wishlist') }}</a>
         <a href="{{ route('settings.profile.edit') }}" class="block px-2 py-2 rounded-lg text-neutral-300 hover:bg-neutral-800 hover:text-white">{{ __('nav.profile_settings') }}</a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf

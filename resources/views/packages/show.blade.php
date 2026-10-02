@@ -20,6 +20,7 @@
     <img src="{{ $photo }}" class="package-gallery-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-500 {{ $i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}" alt="{{ $package->name }}">
     @endforeach
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+    @include('_wishlist-heart', ['package' => $package, 'position' => 'absolute top-4 left-4 z-20'])
     <div class="absolute bottom-0 left-0 right-0 max-w-6xl mx-auto px-4 pb-6 text-white">
         @if($package->category)
             <span class="text-xs px-2 py-0.5 rounded-full bg-white/20 backdrop-blur">{{ $package->category->name }}</span>
