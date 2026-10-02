@@ -131,4 +131,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/reviews', [Admin\ReviewAdminController::class, 'index'])->name('reviews.index');
     Route::patch('/reviews/{review}/toggle-featured', [Admin\ReviewAdminController::class, 'toggleFeatured'])->name('reviews.toggle-featured');
     Route::delete('/reviews/{review}', [Admin\ReviewAdminController::class, 'destroy'])->name('reviews.destroy');
+
+    Route::get('/users', [Admin\UserAdminController::class, 'index'])->name('users.index');
+    Route::delete('/users/{user}', [Admin\UserAdminController::class, 'destroy'])->name('users.destroy');
 });
