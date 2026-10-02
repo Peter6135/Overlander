@@ -34,7 +34,7 @@ class EventController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('cover_photo')) {
-            $data['cover_photo'] = $request->file('cover_photo')->store('events', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/events', 'public');
         }
 
         $data['created_by'] = auth()->id();
@@ -55,10 +55,10 @@ class EventController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('cover_photo')) {
-            if ($event->cover_photo && ! str_starts_with($event->cover_photo, 'http')) {
+            if ($event->cover_photo && str_starts_with($event->cover_photo, 'uploads/')) {
                 Storage::disk('public')->delete($event->cover_photo);
             }
-            $data['cover_photo'] = $request->file('cover_photo')->store('events', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/events', 'public');
         }
 
         $event->update($data);

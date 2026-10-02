@@ -36,7 +36,7 @@ class DestinationController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('cover_photo')) {
-            $data['cover_photo'] = $request->file('cover_photo')->store('destinations', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/destinations', 'public');
         }
 
         $data['slug'] = Str::slug($data['name']);
@@ -63,10 +63,10 @@ class DestinationController extends Controller
         $data = $this->validated($request, $destination->id);
 
         if ($request->hasFile('cover_photo')) {
-            if ($destination->cover_photo && ! str_starts_with($destination->cover_photo, 'http')) {
+            if ($destination->cover_photo && str_starts_with($destination->cover_photo, 'uploads/')) {
                 Storage::disk('public')->delete($destination->cover_photo);
             }
-            $data['cover_photo'] = $request->file('cover_photo')->store('destinations', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/destinations', 'public');
         }
 
         $destination->update($data);
@@ -121,7 +121,7 @@ class DestinationController extends Controller
 
             $photo = ($existingPhotos[$i] ?? null) ?: null;
             if (isset($uploadedPhotos[$i]) && $uploadedPhotos[$i]->isValid() && str_starts_with((string) $uploadedPhotos[$i]->getMimeType(), 'image/')) {
-                $photo = $uploadedPhotos[$i]->store('activities', 'public');
+                $photo = $uploadedPhotos[$i]->store('uploads/activities', 'public');
             }
 
             Activity::create([

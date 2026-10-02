@@ -29,10 +29,10 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('avatar')) {
-            if ($user->avatar && ! str_starts_with($user->avatar, 'http')) {
+            if ($user->avatar && (str_starts_with($user->avatar, 'uploads/') || str_starts_with($user->avatar, 'user-avatars/'))) {
                 Storage::disk('public')->delete($user->avatar);
             }
-            $data['avatar'] = $request->file('avatar')->store('user-avatars', 'public');
+            $data['avatar'] = $request->file('avatar')->store('uploads/user-avatars', 'public');
         }
 
         $user->update([

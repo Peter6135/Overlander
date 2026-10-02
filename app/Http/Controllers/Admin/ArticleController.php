@@ -37,7 +37,7 @@ class ArticleController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('cover_photo')) {
-            $data['cover_photo'] = $request->file('cover_photo')->store('articles', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/articles', 'public');
         }
 
         $data['slug'] = Str::slug($data['title_en']);
@@ -61,10 +61,10 @@ class ArticleController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('cover_photo')) {
-            if ($article->cover_photo && ! str_starts_with($article->cover_photo, 'http')) {
+            if ($article->cover_photo && str_starts_with($article->cover_photo, 'uploads/')) {
                 Storage::disk('public')->delete($article->cover_photo);
             }
-            $data['cover_photo'] = $request->file('cover_photo')->store('articles', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/articles', 'public');
         }
 
         if ($request->boolean('is_published') && ! $article->is_published) {

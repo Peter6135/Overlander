@@ -38,7 +38,7 @@ class PackageController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('cover_photo')) {
-            $data['cover_photo'] = $request->file('cover_photo')->store('packages', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/packages', 'public');
         }
 
         $data['slug'] = Str::slug($data['name']);
@@ -67,10 +67,10 @@ class PackageController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('cover_photo')) {
-            if ($package->cover_photo && ! str_starts_with($package->cover_photo, 'http')) {
+            if ($package->cover_photo && str_starts_with($package->cover_photo, 'uploads/')) {
                 Storage::disk('public')->delete($package->cover_photo);
             }
-            $data['cover_photo'] = $request->file('cover_photo')->store('packages', 'public');
+            $data['cover_photo'] = $request->file('cover_photo')->store('uploads/packages', 'public');
         }
 
         $package->update($data);
@@ -153,7 +153,7 @@ class PackageController extends Controller
 
             $photo = $existingPhotos[$i] ?? null;
             if (isset($uploadedPhotos[$i]) && $uploadedPhotos[$i]->isValid()) {
-                $photo = $uploadedPhotos[$i]->store('itineraries', 'public');
+                $photo = $uploadedPhotos[$i]->store('uploads/itineraries', 'public');
             }
 
             PackageItinerary::create([
