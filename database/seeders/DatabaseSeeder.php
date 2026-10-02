@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CategorySeeder::class);
         $this->call(DemoDataSeeder::class);
+        $this->call(ItineraryPhotoSeeder::class);
     }
 }
