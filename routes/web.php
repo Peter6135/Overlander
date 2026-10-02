@@ -13,6 +13,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SeoController;
 use App\Http\Controllers\Settings;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
@@ -40,6 +41,9 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 Route::get('/about', fn () => view('about'))->name('about');
 Route::get('/faq', fn () => view('faq'))->name('faq');
 Route::get('/contact', fn () => view('contact'))->name('contact');
+Route::get('/privacy', fn () => view('privacy'))->name('privacy');
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 

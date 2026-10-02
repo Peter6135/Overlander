@@ -116,6 +116,7 @@
             </div>
             <div class="border-t border-neutral-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-neutral-500">
                 <p>&copy; {{ __('nav.footer_copyright', ['year' => date('Y')]) }}</p>
+                <a href="{{ route('privacy') }}" class="hover:text-brand-400 transition-colors">{{ __('nav.privacy') }}</a>
             </div>
         </div>
     </footer>
