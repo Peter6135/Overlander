@@ -12,9 +12,40 @@
     <form method="POST" action="{{ route('bookings.store-custom') }}" class="bg-white rounded-2xl border border-gray-200 p-6 space-y-5">
         @csrf
 
+        @if($destinations->isNotEmpty())
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('booking.custom_details_label') }} <span class="text-red-500">*</span></label>
-            <textarea name="custom_request" rows="5" required placeholder="{{ __('booking.custom_details_placeholder') }}"
+            <div class="flex items-baseline justify-between gap-3">
+                <label class="block text-sm font-medium text-gray-700">{{ __('booking.custom_places_label') }}</label>
+                <span id="places-count" class="text-xs font-medium text-brand-600" data-template="{{ __('booking.custom_places_selected') }}"></span>
+            </div>
+            <p class="text-xs text-gray-400 mt-0.5">{{ __('booking.custom_places_hint') }}</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-3">
+                @foreach($destinations as $destination)
+                <label class="relative cursor-pointer">
+                    <input type="checkbox" name="destinations[]" value="{{ $destination->id }}" class="place-input peer sr-only"
+                           @checked(in_array($destination->id, array_map('intval', old('destinations', []))))>
+                    <div class="rounded-xl overflow-hidden border-2 border-gray-200 bg-white transition-all duration-200 hover:border-brand-300 peer-checked:border-brand-500 peer-checked:shadow-md peer-focus-visible:ring-2 peer-focus-visible:ring-brand-300">
+                        <img src="{{ $destination->cover_photo_url }}" alt="{{ $destination->name }}" class="w-full h-24 object-cover">
+                        <div class="p-2">
+                            <p class="text-xs font-semibold text-gray-800 leading-tight">{{ $destination->name }}</p>
+                            <p class="text-[11px] text-gray-400 mt-0.5">{{ $destination->location }}</p>
+                        </div>
+                    </div>
+                    <span class="absolute top-2 right-2 w-6 h-6 rounded-full bg-brand-500 text-white text-xs font-bold items-center justify-center shadow hidden peer-checked:flex">✓</span>
+                </label>
+                @endforeach
+            </div>
+            @error('destinations') <p class="text-red-500 text-xs mt-2">{{ $message }}</p> @enderror
+            @error('destinations.*') <p class="text-red-500 text-xs mt-2">{{ $message }}</p> @enderror
+        </div>
+        @endif
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ $destinations->isNotEmpty() ? __('booking.custom_or_write') : __('booking.custom_details_label') }}
+            </label>
+            <textarea name="custom_request" rows="5" placeholder="{{ __('booking.custom_details_placeholder') }}"
                       class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:border-brand-400 focus:ring-2 focus:ring-brand-100">{{ old('custom_request') }}</textarea>
             @error('custom_request') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
         </div>
@@ -61,3 +92,21 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    const inputs = Array.from(document.querySelectorAll('.place-input'));
+    const counter = document.getElementById('places-count');
+    if (! inputs.length || ! counter) return;
+
+    function update() {
+        const n = inputs.filter(i => i.checked).length;
+        counter.textContent = n ? counter.dataset.template.replace(':n', n) : '';
+    }
+
+    inputs.forEach(i => i.addEventListener('change', update));
+    update();
+})();
+</script>
+@endpush

@@ -37,6 +37,11 @@
     <p style="margin-top: 0;">{{ $booking->message }}</p>
     @endif
 
+    @if($booking->is_custom && $booking->destinations->isNotEmpty())
+    <p style="color: #6b7280; margin-bottom: 4px;">Places of interest</p>
+    <p style="margin-top: 0; font-weight: bold;">{{ $booking->destinations->pluck('name')->join(', ') }}</p>
+    @endif
+
     @if($booking->custom_request)
     <p style="color: #6b7280; margin-bottom: 4px;">Custom request</p>
     <p style="margin-top: 0;">{{ $booking->custom_request }}</p>

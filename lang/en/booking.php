@@ -70,7 +70,7 @@ return [
     'payment_status_paid' => 'Paid',
     'continue_whatsapp' => 'Continue on WhatsApp',
     'whatsapp_message_package' => "Hi, I'd like to follow up on my booking #:id for :package (:plan), on :date for :pax traveler(s). My name is :name.",
-    'whatsapp_message_custom' => "Hi, I'd like to follow up on my custom trip request #:id, planned around :date for :pax traveler(s). My name is :name.",
+    'whatsapp_message_custom' => "Hi, I'd like to follow up on my custom trip request #:id, planned around :date for :pax traveler(s). My name is :name.:places",
 
     'email_heading' => 'Booking Confirmed',
     'email_trip_label' => 'Trip',
@@ -80,4 +80,12 @@ return [
     'email_footer_intro' => 'Your e-ticket and full booking details are available anytime on your booking page:',
     'email_view_booking' => 'View / Print Your Booking',
     'email_footer_note' => 'Our team will reach out shortly to confirm the details. Safe travels!',
+
+    'custom_places_label' => 'Pick places you would like to visit',
+    'custom_places_hint' => 'Optional. Tap the destinations you are interested in, one or several.',
+    'custom_places_selected' => ':n selected',
+    'custom_or_write' => 'Or describe your trip in your own words',
+    'custom_details_optional' => 'Add anything else we should know',
+    'custom_need_something' => 'Pick at least one destination or describe your trip.',
+    'custom_places_chosen' => 'Places of interest',
 ];

@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Mail\BookingConfirmationMail;
 use App\Mail\NewBookingAdminMail;
 use App\Models\Booking;
+use App\Models\Destination;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class BookingController extends Controller
 {
@@ -76,7 +78,9 @@ class BookingController extends Controller
 
     public function createCustom()
     {
-        return view('bookings.create-custom');
+        $destinations = Destination::where('is_active', true)->orderBy('name')->get();
+
+        return view('bookings.create-custom', compact('destinations'));
     }
 
     public function storeCustom(Request $request)
@@ -87,8 +91,16 @@ class BookingController extends Controller
             'guest_phone' => 'required|string|max:20',
             'trip_date' => 'required|date|after:today',
             'pax' => 'required|integer|min:1|max:20',
-            'custom_request' => 'required|string|max:2000',
+            'custom_request' => 'nullable|required_without:destinations|string|max:2000',
+            'destinations' => 'nullable|required_without:custom_request|array|max:10',
+            'destinations.*' => [Rule::exists('destinations', 'id')->where('is_active', true)],
+        ], [
+            'custom_request.required_without' => __('booking.custom_need_something'),
+            'destinations.required_without' => __('booking.custom_need_something'),
         ]);
+
+        $destinationIds = collect($data['destinations'] ?? [])->unique()->values()->all();
+        unset($data['destinations']);
 
         $booking = auth()->user()->bookings()->create([
             ...$data,
@@ -97,11 +109,14 @@ class BookingController extends Controller
             'status' => 'pending',
         ]);
 
+        $booking->destinations()->sync($destinationIds);
+
         $this->notifyAdmin($booking);
 
         return redirect()->route('bookings.show', $booking)
             ->with('success', __('flash.custom_trip_received'));
     }
+
 
     private function notifyAdmin(Booking $booking): void
     {
@@ -127,7 +142,7 @@ class BookingController extends Controller
     public function show(Booking $booking)
     {
         abort_unless($booking->user_id === auth()->id(), 403);
-        $booking->load('package', 'packagePlan', 'review');
+        $booking->load('package', 'packagePlan', 'review', 'destinations');
 
         return view('bookings.show', compact('booking'));
     }

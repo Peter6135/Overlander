@@ -52,6 +52,9 @@
                         <td class="px-6 py-3 text-gray-700">
                             {{ $booking->is_custom ? 'Custom Trip' : $booking->package?->name }}
                             @if($booking->packagePlan) <span class="text-xs text-gray-400">({{ $booking->packagePlan->name }})</span> @endif
+                            @if($booking->is_custom && $booking->destinations->isNotEmpty())
+                                <p class="text-xs text-brand-600 mt-0.5">{{ $booking->destinations->pluck('name')->join(', ') }}</p>
+                            @endif
                         </td>
                         <td class="px-6 py-3 text-gray-500">{{ $booking->trip_date->format('d M Y') }}</td>
                         <td class="px-6 py-3 text-center text-gray-700">{{ $booking->pax }}</td>

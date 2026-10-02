@@ -69,8 +69,8 @@ return [
     'payment_status_unpaid' => 'Belum Dibayar',
     'payment_status_paid' => 'Sudah Dibayar',
     'continue_whatsapp' => 'Lanjut ke WhatsApp',
-    'whatsapp_message_package' => 'Halo, saya mau follow up reservasi #:id untuk :package (:plan), tanggal :date, :pax orang. Nama saya :name.',
-    'whatsapp_message_custom' => 'Halo, saya mau follow up permintaan trip custom #:id, rencana tanggal :date, :pax orang. Nama saya :name.',
+    'whatsapp_message_package' => 'Halo, saya mau follow up reservasi #:id untuk :package (:plan), tanggal :date, :pax orang. Nama saya :name.:places',
+    'whatsapp_message_custom' => 'Halo, saya mau follow up permintaan trip custom #:id, rencana tanggal :date, :pax orang. Nama saya :name.:places',
 
     'email_heading' => 'Reservasi Dikonfirmasi',
     'email_trip_label' => 'Trip',
@@ -80,4 +80,12 @@ return [
     'email_footer_intro' => 'E-tiket dan detail reservasi lengkap selalu bisa dilihat di halaman reservasimu:',
     'email_view_booking' => 'Lihat / Cetak Reservasimu',
     'email_footer_note' => 'Tim kami akan segera menghubungimu untuk konfirmasi detail. Selamat jalan-jalan!',
+
+    'custom_places_label' => 'Pilih tempat yang ingin kamu kunjungi',
+    'custom_places_hint' => 'Opsional. Tap destinasi yang kamu minati, boleh satu atau beberapa.',
+    'custom_places_selected' => ':n dipilih',
+    'custom_or_write' => 'Atau ceritakan tripmu dengan kata-katamu sendiri',
+    'custom_details_optional' => 'Tambahkan hal lain yang perlu kami tahu',
+    'custom_need_something' => 'Pilih minimal satu destinasi atau ceritakan tripmu.',
+    'custom_places_chosen' => 'Tempat yang diminati',
 ];
