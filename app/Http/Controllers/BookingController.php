@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mail\BookingConfirmationMail;
+use App\Mail\NewBookingAdminMail;
 use App\Models\Booking;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -65,7 +67,8 @@ class BookingController extends Controller
 
         session()->forget('cart');
 
-        Mail::to($booking->guest_email)->send(new BookingConfirmationMail($booking));
+        $this->sendMail($booking->guest_email, new BookingConfirmationMail($booking), $booking);
+        $this->notifyAdmin($booking);
 
         return redirect()->route('bookings.show', $booking)
             ->with('success', __('flash.booking_created'));
@@ -94,8 +97,31 @@ class BookingController extends Controller
             'status' => 'pending',
         ]);
 
+        $this->notifyAdmin($booking);
+
         return redirect()->route('bookings.show', $booking)
             ->with('success', __('flash.custom_trip_received'));
+    }
+
+    private function notifyAdmin(Booking $booking): void
+    {
+        $to = config('booking.notify_email');
+
+        if ($to) {
+            $this->sendMail($to, new NewBookingAdminMail($booking), $booking);
+        }
+    }
+
+    private function sendMail(string $to, \Illuminate\Mail\Mailable $mail, Booking $booking): void
+    {
+        try {
+            Mail::to($to)->send($mail);
+        } catch (\Throwable $e) {
+            Log::error('Booking email failed: ' . $e->getMessage(), [
+                'booking_id' => $booking->id,
+                'mail' => class_basename($mail),
+            ]);
+        }
     }
 
     public function show(Booking $booking)
